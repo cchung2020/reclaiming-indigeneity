@@ -1,0 +1,28 @@
+html, body {
+  height: 100%;
+  background: #291000; 
+  color: #e0ffdc;
+  font-family: 'Lora', Georgia, serif;
+}
+
+a {
+  color: #4ac9ff;
+}
+
+h1 {
+  text-align: center;
+}
+
+footer {
+  background: #3b1a00;
+  text-align: center;
+  padding: 0.1rem;
+}
+
+label {
+  color: #e0ffdc;
+  font-weight: 600;
+  display: block;
+  margin-bottom: 0.5rem;
+}
+
