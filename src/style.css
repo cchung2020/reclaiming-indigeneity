@@ -1,28 +1,167 @@
-html, body {
-  height: 100%;
-  background: #291000; 
-  color: #e0ffdc;
-  font-family: 'Lora', Georgia, serif;
+/* Earthy Colombian text-first theme */
+:root {
+  --earth-bg: #f4efe6;
+  /* warm parchment, not white */
+  --card-bg: #fbf6ec;
+  /* light clay for sections */
+  --cacao: #5c4033;
+  /* deep brown for headings */
+  --guadua: #2e8b57;
+  /* green accents/links */
+  --ochre: #e3b304;
+  /* ochre hover/accents */
+  --ink: #2a2522;
+  /* body text */
+  --muted: #6b615b;
+  /* secondary text */
+  --rule: #e6dccf;
+  /* soft divider */
+  --maxw: 68rem;
+  /* readable line length */
+  --pad: 1rem;
 }
 
-a {
-  color: #4ac9ff;
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  height: 100%;
+}
+
+body {
+  margin: 0;
+  background: var(--earth-bg);
+  color: var(--ink);
+  font: 16px/1.7 system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, sans-serif;
+  letter-spacing: 0.1px;
+}
+
+/* Header / Nav */
+header {
+  border-bottom: 1px solid var(--rule);
+  background: transparent;
+}
+
+nav {
+  max-width: var(--maxw);
+  margin: 0 auto;
+  padding: .75rem var(--pad);
+  display: flex;
+  gap: .75rem;
+  flex-wrap: wrap;
+}
+
+nav a {
+  color: var(--guadua);
+  text-decoration: none;
+  padding: .35rem .6rem;
+  border-radius: .5rem;
+}
+
+nav a.active {
+  background: #eadfcd;
+  color: var(--cacao);
+}
+
+nav a:hover {
+  background: #eadfcd;
+  color: var(--cacao);
+}
+
+/* Page container */
+main {
+  max-width: var(--maxw);
+  margin: 0 auto;
+  padding: 1rem var(--pad) 3rem;
+}
+
+/* Typography */
+h1,
+h2 {
+  color: var(--cacao);
+  line-height: 1.25;
+  margin: 0 0 .5rem;
 }
 
 h1 {
+  font-size: clamp(1.8rem, 2.6vw + 1rem, 2.4rem);
   text-align: center;
 }
 
+h2 {
+  font-size: clamp(1.2rem, 1.4vw + .9rem, 1.5rem);
+  margin-top: 1.25rem;
+}
+
+p {
+  margin: .75rem 0;
+}
+
+a {
+  color: var(--guadua);
+}
+
+a:hover {
+  color: var(--cacao);
+  background: #efe6d6;
+}
+
+/* Sections as soft cards for readability */
+section {
+  background: var(--card-bg);
+  border: 1px solid var(--rule);
+  border-radius: .75rem;
+  padding: 1rem;
+  margin: 1rem 0;
+}
+
+/* Footer */
 footer {
-  background: #3b1a00;
-  text-align: center;
-  padding: 0.1rem;
+  border-top: 1px solid var(--rule);
+  background: transparent;
 }
 
-label {
-  color: #e0ffdc;
-  font-weight: 600;
-  display: block;
-  margin-bottom: 0.5rem;
+footer p {
+  max-width: var(--maxw);
+  margin: 0 auto;
+  padding: 1rem var(--pad) 2rem;
+  color: var(--muted);
 }
 
+/* Forms (Contact) */
+form {
+  display: grid;
+  gap: .5rem;
+  max-width: 34rem;
+}
+
+input,
+textarea,
+button {
+  font: inherit;
+}
+
+input,
+textarea {
+  padding: .6rem .7rem;
+  border: 1px solid var(--rule);
+  border-radius: .5rem;
+  background: #fff9f0;
+}
+
+button {
+  margin-top: .5rem;
+  padding: .6rem .9rem;
+  border: none;
+  border-radius: .5rem;
+  background: var(--guadua);
+  color: #fff;
+  cursor: pointer;
+}
+
+button:hover {
+  background: var(--ochre);
+  color: var(--ink);
+}

@@ -4,11 +4,36 @@ export default function Header() {
   return (
     <header>
       <nav>
-        <NavLink to="/">About</NavLink>
-        <NavLink to="/spanish-immersion">Spanish Immersion</NavLink>
-        <NavLink to="/solo-retreats">Solo Retreats</NavLink>
-        <NavLink to="/jewish-water-rituals">Jewish Water Rituals</NavLink>
-        <NavLink to="/contact">Contact</NavLink>
+        <NavLink
+          to="/"
+          className={({ isActive }) => (isActive ? "active" : undefined)}
+        >
+          About
+        </NavLink>
+        <NavLink
+          to="/spanish-immersion"
+          className={({ isActive }) => (isActive ? "active" : undefined)}
+        >
+          Spanish Immersion
+        </NavLink>
+        <NavLink
+          to="/solo-retreats"
+          className={({ isActive }) => (isActive ? "active" : undefined)}
+        >
+          Solo Retreats
+        </NavLink>
+        <NavLink
+          to="/jewish-water-rituals"
+          className={({ isActive }) => (isActive ? "active" : undefined)}
+        >
+          Jewish Water Rituals
+        </NavLink>
+        <NavLink
+          to="/contact"
+          className={({ isActive }) => (isActive ? "active" : undefined)}
+        >
+          Contact
+        </NavLink>
       </nav>
     </header>
   );
