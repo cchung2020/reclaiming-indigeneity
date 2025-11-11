@@ -41,7 +41,7 @@ export default async function handler(req, res) {
     // };
 
     // const result = await db.collection("Contact").insertOne(doc);
-    res.status(201).json({ ok: true, id: result.insertedId });
+    // res.status(201).json({ ok: true, id: result.insertedId });
   } catch (err) {
     console.error(err);
     res.status(500).json({ ok: false, message: "Server error" });
