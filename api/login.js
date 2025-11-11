@@ -23,6 +23,7 @@ export default async function handler(req, res) {
     const { email, password } =
       typeof req.body === "string" ? JSON.parse(req.body || "{}") : req.body;
 
+    console.log(`${email} ${password}`)
     // if (!name || !email || !message) {
     //   res.status(400).json({ ok: false, message: "Missing required fields" });
     //   return;
@@ -32,7 +33,7 @@ export default async function handler(req, res) {
     const db = client.db("ReclaimingIndigeneity");
     console.log("finished awaiting thing")
 
-    const client_list = await db.collection("Clients").find().toArray();
+    const client_list = await db.collection("Clients").findOne({email: email, password: password});
     console.log(JSON.stringify(client_list));
 
     // const doc = {
