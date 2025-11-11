@@ -5,6 +5,7 @@ export default function Login() {
         email: "",
         password: ""
     })
+    const [logged_in, setLoggedIn] = useState(false);
 
     async function onSubmit(e) {
         e.preventDefault()
@@ -18,7 +19,9 @@ export default function Login() {
             body: JSON.stringify(form),
         })    
 
-        
+        console.log("login res: ", login_res)
+
+
     }
 
     return (
