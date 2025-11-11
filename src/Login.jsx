@@ -10,7 +10,15 @@ export default function Login() {
         e.preventDefault()
 
         const form_json = JSON.stringify(form);
-        console.log(`pretending to submit ${form_json}... maybe actually submitting...`)
+        console.log(`pretending to submit ${form_json}`)
+
+        const login_res = await fetch("/api/login", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(form),
+        })    
+
+        
     }
 
     return (
