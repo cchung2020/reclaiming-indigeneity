@@ -19,7 +19,11 @@ export default function Login() {
             body: JSON.stringify(form),
         })    
 
+        const data = await login_res.json()
+
         console.log("login res: ", login_res)
+        console.log('data', data)
+        console.log("ok?", login_res.ok)
 
 
     }

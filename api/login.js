@@ -29,12 +29,14 @@ export default async function handler(req, res) {
     //   return;
     // }
 
-    const client = await clientPromise;
-    const db = client.db("ReclaimingIndigeneity");
+    const mongo_client = await clientPromise;
+    const db = mongo_client.db("ReclaimingIndigeneity");
     console.log("finished awaiting thing")
 
-    const client_list = await db.collection("Clients").findOne({email: email, password: password});
-    console.log(JSON.stringify(client_list));
+    const client = await db.collection("Clients").findOne({email: email, password: password});
+    // console.log(JSON.stringify(client_list));
+
+ 
 
     // const doc = {
     //   name,
@@ -47,7 +49,12 @@ export default async function handler(req, res) {
 
     // const result = await db.collection("Contact").insertOne(doc);
     // res.status(201).json({ ok: true, id: result.insertedId });
-    res.status(200).json({ ok: true })
+    if (client) {
+      res.status(200).json({ ok: true })
+    } else {
+      console.log("saying bad username or password")
+      res.status(401).json( {error: "bad username or password"} );
+    }
   } catch (err) {
     console.error(err);
     res.status(500).json({ ok: false, message: "Server error" });
