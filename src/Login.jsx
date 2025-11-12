@@ -8,12 +8,9 @@ export default function Login() {
     })
 
     const initialy_logged_in = (localStorage.getItem('logged_in') !== null);
-    console.log("initially logged in?", initialy_logged_in);
     const [logged_in, setLoggedIn] = useState(initialy_logged_in);
-    console.log("logged in here?:", logged_in)
 
     function logOut() {
-        console.log("trying to log out");
         localStorage.removeItem('logged_in')
         setLoggedIn(false);
         console.log("logged in?", logged_in)
@@ -21,9 +18,6 @@ export default function Login() {
 
     async function onSubmit(e) {
         e.preventDefault()
-
-        const form_json = JSON.stringify(form);
-        console.log(`pretending to submit ${form_json}`)
 
         const login_res = await fetch("/api/login", {
             method: "POST",
@@ -46,7 +40,6 @@ export default function Login() {
     }
 
     if (logged_in) {
-        console.log("returning the 'logged in' screen, logged_in = ", logged_in, Boolean(logged_in));
         return (
             <main>
                 <h1>You are logged in</h1>
