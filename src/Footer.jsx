@@ -25,18 +25,9 @@ console.log(cur_temp_outer);
 export default function Footer() {
   const [cur_temp, setTemp] = useState('');
 
-  // fetch(weather_url)
-  //   .then(x => x.json())
-  //   .then(data => {
-  //       setTemp(data.hourly.temperature_2m[0]);
-  //     }
-  //   )
-
   if (cur_temp != cur_temp_outer) {
     setTemp(cur_temp_outer);
   }
-  // const weather_json = await(a.json());
-  // console.log(weather_json)
 
   return (
     <footer>
