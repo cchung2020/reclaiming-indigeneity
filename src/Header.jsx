@@ -2,27 +2,6 @@ import { NavLink } from "react-router-dom";
 import { useState } from "react";
 
 
-function LoginLogoutButton() {
-  const [logged_in, setLoggedIn] = useState(false);
-  const [button_txt, setButtonTxt] = useState("login")
-
-  function toggle_logged_in() {
-    if (logged_in) {
-      setButtonTxt("logout");
-    } else {
-      setButtonTxt("login");
-    }
-
-    setLoggedIn(!logged_in);
-  }
-
-  return (
-      <div onClick={toggle_logged_in}>
-          {button_txt}
-      </div>
-  )
-}
-
 export default function Header() {
   return (
     <header>
@@ -64,8 +43,6 @@ export default function Header() {
         >
           Login/Logout
         </NavLink>
-        <LoginLogoutButton />
-
       </nav>
     </header>
   );
