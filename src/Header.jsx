@@ -62,7 +62,7 @@ export default function Header() {
           to="/login"
           className={({ isActive }) => (isActive ? "active" : undefined)}
         >
-          loggg
+          Login/Logout
         </NavLink>
         <LoginLogoutButton />
 

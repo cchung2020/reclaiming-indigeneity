@@ -7,6 +7,12 @@ export default function Login() {
     })
     const [logged_in, setLoggedIn] = useState(false);
 
+    function logOut() {
+        console.log("trying to log out");
+        setLoggedIn(false);
+        console.log("logged in?", logged_in)
+    }
+
     async function onSubmit(e) {
         e.preventDefault()
 
@@ -25,41 +31,54 @@ export default function Login() {
         console.log('data', data)
         console.log("ok?", login_res.ok)
 
+        if (login_res.ok) {
+            setLoggedIn(true);
+        }
+
 
     }
 
-    return (
-        <main>
-            <h1>
-                hola
-            </h1>
+    if (!logged_in) {
+        return (
+            <main>
+                <h1>
+                    Login
+                </h1>
 
-            <form onSubmit={onSubmit}>
-                <label htmlFor="email">Email</label>
-                <input
-                    id="email"
-                    name="email"
-                    type="email"
-                    value={form.email}
-                    onChange={(e) => setForm({ ...form, email: e.target.value })}
-                    required
-                />
+                <form onSubmit={onSubmit}>
+                    <label htmlFor="email">Email</label>
+                    <input
+                        id="email"
+                        name="email"
+                        type="email"
+                        value={form.email}
+                        onChange={(e) => setForm({ ...form, email: e.target.value })}
+                        required
+                    />
 
-                <label htmlFor="password">Password</label>
-                <input
-                    id="password"
-                    name="password"
-                    type="password"
-                    value={form.password}
-                    onChange={(e) => setForm({...form, password: e.target.value })}
-                    required
-                />
+                    <label htmlFor="password">Password</label>
+                    <input
+                        id="password"
+                        name="password"
+                        type="password"
+                        value={form.password}
+                        onChange={(e) => setForm({...form, password: e.target.value })}
+                        required
+                    />
 
-                <button type="submit">
-                    Submit
-                </button>
+                    <button type="submit">
+                        Submit
+                    </button>
 
-            </form>
-        </main>
-    )
+                </form>
+            </main>
+        )
+    }  else {
+        return (
+            <main>
+                <h1>You are logged in</h1>
+                <button onClick={logOut}>Log out?</button>
+            </main>
+        )
+    }
 }
