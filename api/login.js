@@ -23,7 +23,6 @@ export default async function handler(req, res) {
     const { email, password } =
       typeof req.body === "string" ? JSON.parse(req.body || "{}") : req.body;
 
-    console.log(`${email} ${password}`)
     // if (!name || !email || !message) {
     //   res.status(400).json({ ok: false, message: "Missing required fields" });
     //   return;
@@ -34,21 +33,7 @@ export default async function handler(req, res) {
     console.log("finished awaiting thing")
 
     const client = await db.collection("Clients").findOne({email: email, password: password});
-    // console.log(JSON.stringify(client_list));
-
  
-
-    // const doc = {
-    //   name,
-    //   email,
-    //   phone_number: phone_number || null,
-    //   message,
-    //   createdAt: new Date(),
-    //   source: "vercel",
-    // };
-
-    // const result = await db.collection("Contact").insertOne(doc);
-    // res.status(201).json({ ok: true, id: result.insertedId });
     if (client) {
       res.status(200).json({ ok: true })
     } else {

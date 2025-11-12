@@ -1,14 +1,20 @@
 import { useState } from "react";
 
+
 export default function Login() {
     const [form, setForm] = useState({
         email: "",
         password: ""
     })
-    const [logged_in, setLoggedIn] = useState(false);
+
+    const initialy_logged_in = (localStorage.getItem('logged_in') !== null);
+    console.log("initially logged in?", initialy_logged_in);
+    const [logged_in, setLoggedIn] = useState(initialy_logged_in);
+    console.log("logged in here?:", logged_in)
 
     function logOut() {
         console.log("trying to log out");
+        localStorage.removeItem('logged_in')
         setLoggedIn(false);
         console.log("logged in?", logged_in)
     }
@@ -33,12 +39,21 @@ export default function Login() {
 
         if (login_res.ok) {
             setLoggedIn(true);
+            localStorage.setItem('logged_in', 'yes');
         }
 
 
     }
 
-    if (!logged_in) {
+    if (logged_in) {
+        console.log("returning the 'logged in' screen, logged_in = ", logged_in, Boolean(logged_in));
+        return (
+            <main>
+                <h1>You are logged in</h1>
+                <button onClick={logOut}>Log out?</button>
+            </main>
+        )
+    } else {
         return (
             <main>
                 <h1>
@@ -71,13 +86,6 @@ export default function Login() {
                     </button>
 
                 </form>
-            </main>
-        )
-    }  else {
-        return (
-            <main>
-                <h1>You are logged in</h1>
-                <button onClick={logOut}>Log out?</button>
             </main>
         )
     }
