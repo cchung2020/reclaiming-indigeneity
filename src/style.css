@@ -157,11 +157,48 @@ footer {
   background: transparent;
 }
 
-footer p {
+.footer-brand {
   max-width: var(--maxw);
   margin: 0 auto;
   padding: 1.25rem var(--pad) 2.5rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: .5rem;
+  text-align: center;
+}
+
+.footer-brand a {
+  color: var(--green);
+  text-decoration: none;
+  font-weight: 500;
+  margin-top: .4rem;
+}
+
+.footer-brand a:hover {
+  color: var(--orange);
+}
+
+.footer-logo {
+  width: 84px;
+  height: auto;
+  display: block;
+  flex-shrink: 0;
+  border-radius: .25rem;
+}
+
+footer p {
   color: var(--muted);
+  margin: 0;
+}
+
+@media (min-width: 600px) {
+  .footer-brand {
+    flex-direction: row;
+    justify-content: left;
+    gap: 1rem;
+    text-align: left;
+  }
 }
 
 form {
