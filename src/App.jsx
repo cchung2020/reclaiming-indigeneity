@@ -6,6 +6,7 @@ import SpanishImmersion from "./SpanishImmersion";
 import SoloRetreats from "./SoloRetreats";
 import JewishWaterRituals from "./JewishWaterRituals";
 import Contact from "./Contact";
+import Login from "./Login";
 
 export default function App() {
   return (
@@ -17,6 +18,7 @@ export default function App() {
         <Route path="/solo-retreats" element={<SoloRetreats />} />
         <Route path="/jewish-water-rituals" element={<JewishWaterRituals />} />
         <Route path="/contact" element={<Contact />} />
+        <Route path="/login" element={<Login />} />
       </Routes>
       <Footer />
     </>

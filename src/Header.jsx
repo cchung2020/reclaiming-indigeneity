@@ -1,5 +1,6 @@
 import { NavLink } from "react-router-dom";
 
+
 export default function Header() {
   return (
     <header>
@@ -33,6 +34,13 @@ export default function Header() {
           className={({ isActive }) => (isActive ? "active" : undefined)}
         >
           Contact
+        </NavLink>
+
+        <NavLink
+          to="/login"
+          className={({ isActive }) => (isActive ? "active" : undefined)}
+        >
+          Login/Logout
         </NavLink>
       </nav>
     </header>
