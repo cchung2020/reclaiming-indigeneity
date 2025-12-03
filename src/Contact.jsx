@@ -1,7 +1,47 @@
 // src/Contact.jsx
-import { useState } from "react";
+import { useMemo, useState } from "react";
+
+const timeOptions = [
+  "10:00 AM",
+  "10:30 AM",
+  "11:00 AM",
+  "2:00 PM",
+  "2:30 PM",
+  "3:00 PM",
+  "3:30 PM",
+  "4:00 PM",
+  "4:30 PM",
+  "5:00 PM",
+  "5:30 PM",
+  "6:00 PM",
+  "6:30 PM",
+  "7:00 PM",
+];
+
+function getMonthMatrix(year, month) {
+  const first = new Date(year, month, 1);
+  const startDay = first.getDay(); // 0 = Sunday
+  const daysInMonth = new Date(year, month + 1, 0).getDate();
+  const matrix = [];
+  let day = 1 - startDay;
+  for (let w = 0; w < 6; w++) {
+    const week = [];
+    for (let d = 0; d < 7; d++) {
+      const current = new Date(year, month, day);
+      week.push({
+        date: current,
+        inMonth: current.getMonth() === month,
+        label: current.getDate(),
+      });
+      day += 1;
+    }
+    matrix.push(week);
+  }
+  return matrix;
+}
 
 export default function Contact() {
+  const today = new Date();
   const [form, setForm] = useState({
     name: "",
     email: "",
@@ -11,28 +51,39 @@ export default function Contact() {
   const [status, setStatus] = useState({ type: "", text: "" });
   const [submitting, setSubmitting] = useState(false);
 
+  const [viewYear, setViewYear] = useState(today.getFullYear());
+  const [viewMonth, setViewMonth] = useState(today.getMonth());
+  const [selectedDate, setSelectedDate] = useState(today);
+  const [selectedTime, setSelectedTime] = useState("");
+
+  const monthMatrix = useMemo(() => getMonthMatrix(viewYear, viewMonth), [viewYear, viewMonth]);
+  const monthLabel = new Date(viewYear, viewMonth, 1).toLocaleString("en-US", { month: "long", year: "numeric" });
+  const selectedLabel = selectedDate.toLocaleDateString("en-US", { weekday: "long", month: "long", day: "numeric" });
+
+  function changeMonth(delta) {
+    const next = new Date(viewYear, viewMonth + delta, 1);
+    setViewYear(next.getFullYear());
+    setViewMonth(next.getMonth());
+  }
+
   async function onSubmit(e) {
     e.preventDefault();
     setSubmitting(true);
     setStatus({ type: "", text: "" });
 
-    try {
-      const res = await fetch("/api/contact", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(form),
-      });
+    const payload = {
+      ...form,
+      preferred_date: selectedDate.toISOString(),
+      preferred_time: selectedTime,
+    };
 
-      const data = await res.json();
-      if (!res.ok) throw new Error(data.message || "Failed to send");
+    // testing to see if booking payload is showing
+    console.log("booking request:", payload);
 
-      setStatus({ type: "ok", text: "Message sent! I’ll get back to you soon." });
-      setForm({ name: "", email: "", phone_number: "", message: "" });
-    } catch (err) {
-      setStatus({ type: "err", text: err.message });
-    } finally {
-      setSubmitting(false);
-    }
+    setStatus({ type: "ok", text: "Message captured locally. Check console output." });
+    setForm({ name: "", email: "", phone_number: "", message: "" });
+    setSelectedTime("");
+    setSubmitting(false);
   }
 
   return (
@@ -42,9 +93,8 @@ export default function Contact() {
       <section>
         <h2>Book an Appointment</h2>
         <p>
-          Whether you’re curious about a retreat, ritual, or immersion
-          experience, or just want to ask questions, I’d love to connect. Use
-          the form below or reach out via email or phone.
+          Whether you're curious about a retreat, ritual, or immersion experience, or just want to ask questions,
+          I'd love to connect. Use the form below or reach out via email or phone.
         </p>
       </section>
 
@@ -53,9 +103,77 @@ export default function Contact() {
         <p>Email: rosa@reclaimingindigeneity.com</p>
         <p>Phone: +1 (617) 488-9988</p>
         <p>
-          <em>Let’s come home together.</em>
+          <em>Let's come home together.</em>
         </p>
       </section>
+
+      <section className="calendar-card">
+        <div className="calendar-nav">
+          <button type="button" className="ghost" onClick={() => changeMonth(-1)} aria-label="Previous month">
+          </button>
+          <div className="calendar-month">{monthLabel}</div>
+          <button type="button" className="ghost" onClick={() => changeMonth(1)} aria-label="Next month">
+          </button>
+        </div>
+
+        <div className="calendar-grid">
+          {["S", "M", "T", "W", "T", "F", "S"].map((d) => (
+            <div key={d} className="calendar-day-head">
+              {d}
+            </div>
+          ))}
+          {monthMatrix.map((week, wi) =>
+            week.map((day, di) => {
+              const isSelected =
+                day.inMonth && day.date.toDateString() === selectedDate.toDateString();
+              const isToday = day.date.toDateString() === today.toDateString();
+              return (
+                <button
+                  key={`${wi}-${di}`}
+                  type="button"
+                  className={`calendar-cell${day.inMonth ? "" : " muted"}${isSelected ? " selected" : ""}${
+                    isToday && !isSelected ? " today" : ""
+                  }`}
+                  onClick={() => {
+                    if (day.inMonth) {
+                      setSelectedDate(day.date);
+                      setSelectedTime("");
+                    }
+                  }}
+                  disabled={!day.inMonth}
+                >
+                  {day.label}
+                </button>
+              );
+            })
+          )}
+        </div>
+
+        <div className="times">
+          <div className="times-header">
+            <div>{selectedLabel}</div>
+            <small>Choose a time</small>
+          </div>
+          <div className="times-grid">
+            {timeOptions.map((time) => (
+              <button
+                key={time}
+                type="button"
+                className={`time-slot${selectedTime === time ? " active" : ""}`}
+                onClick={() => setSelectedTime(time)}
+              >
+                {time}
+              </button>
+            ))}
+          </div>
+        </div>
+      </section>
+
+          <button type="submit" disabled={submitting || !selectedDate || !selectedTime}>
+            {submitting ? "Scheduling..." : "Schedule a Session"}
+          </button>
+          <br></br>
+
       <section>
         <h2>Send a Message</h2>
         <form onSubmit={onSubmit}>
@@ -98,7 +216,7 @@ export default function Contact() {
             required
           />
 
-          <button type="submit" disabled={submitting}>
+          <button type="submit" disabled={submitting || !selectedDate || !selectedTime}>
             {submitting ? "Sending..." : "Send"}
           </button>
 

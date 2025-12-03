@@ -268,3 +268,129 @@ button:active {
     justify-self: center;
   }
 }
+
+.calendar-card {
+  margin: 1.5rem 0 2rem;
+  padding: 1.25rem;
+  border: 1px solid var(--line);
+  border-radius: .9rem;
+  background: rgba(46, 32, 24, 0.6);
+}
+
+.calendar-nav {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-bottom: 1rem;
+}
+
+.calendar-month {
+  font-weight: 700;
+  letter-spacing: 0.2px;
+}
+
+.calendar-grid {
+  display: grid;
+  grid-template-columns: repeat(7, minmax(0, 1fr));
+  gap: .35rem;
+  margin-bottom: 1rem;
+}
+
+.calendar-day-head {
+  text-align: center;
+  color: var(--muted);
+  font-weight: 600;
+  padding: .25rem 0;
+  font-size: 0.95rem;
+}
+
+.calendar-cell {
+  height: 48px;
+  border-radius: .6rem;
+  background: #2E2018;
+  border: 1px solid var(--line);
+  color: var(--text);
+  cursor: pointer;
+  transition: transform .08s, border-color .12s, background-color .12s;
+}
+
+.calendar-cell:hover {
+  border-color: var(--orange);
+}
+
+.calendar-cell.selected {
+  background: var(--green);
+  color: #0d0f0c;
+  border-color: var(--green);
+  font-weight: 700;
+}
+
+.calendar-cell.today:not(.selected) {
+  border-color: var(--purple);
+}
+
+.calendar-cell.muted {
+  color: rgba(232, 220, 197, 0.35);
+  cursor: not-allowed;
+}
+
+.times {
+  margin-top: .75rem;
+}
+
+.times-header {
+  display: flex;
+  align-items: baseline;
+  gap: .75rem;
+  margin-bottom: .6rem;
+  font-weight: 600;
+}
+
+.times-header small {
+  color: var(--muted);
+}
+
+.times-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+  gap: .6rem;
+}
+
+.time-slot {
+  border-radius: .6rem;
+  padding: .75rem;
+  background: #2E2018;
+  border: 1px solid var(--line);
+  color: var(--text);
+  cursor: pointer;
+  transition: border-color .12s, background-color .12s, transform .08s;
+}
+
+.time-slot:hover {
+  border-color: var(--orange);
+}
+
+.time-slot.active {
+  background: var(--orange);
+  color: #1d140f;
+  border-color: var(--orange);
+  font-weight: 700;
+}
+
+button.ghost {
+  background: transparent;
+  border: 1px solid var(--line);
+  color: var(--text);
+  padding: .45rem .65rem;
+  border-radius: .6rem;
+}
+@media (max-width: 600px) {
+  .calendar-card {
+    padding: 1rem;
+  }
+  .calendar-cell {
+    height: 42px;
+    font-size: 0.95rem;
+  }
+}
