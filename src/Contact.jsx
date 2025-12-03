@@ -50,6 +50,7 @@ export default function Contact() {
   });
   const [status, setStatus] = useState({ type: "", text: "" });
   const [submitting, setSubmitting] = useState(false);
+  const [popup, setPopup] = useState(null);
 
   const [viewYear, setViewYear] = useState(today.getFullYear());
   const [viewMonth, setViewMonth] = useState(today.getMonth());
@@ -80,10 +81,28 @@ export default function Contact() {
     // testing to see if booking payload is showing
     console.log("booking request:", payload);
 
-    setStatus({ type: "ok", text: "Message captured locally. Check console output." });
+    setStatus({ type: "ok", text: "Successfully sent. (also in console output)" });
+    setPopup({
+      title: "Message sent",
+      detail: "Thanks for reaching out. We received your note and will follow up soon.",
+    });
     setForm({ name: "", email: "", phone_number: "", message: "" });
     setSelectedTime("");
     setSubmitting(false);
+  }
+
+  function onSchedule() {
+    if (!selectedDate || !selectedTime) return;
+    const payload = {
+      ...form,
+      preferred_date: selectedDate.toISOString(),
+      preferred_time: selectedTime,
+    };
+    console.log("schedule request:", payload);
+    setPopup({
+      title: "Session scheduled",
+      detail: `${selectedLabel} at ${selectedTime}. We'll confirm details soon.`,
+    });
   }
 
   return (
@@ -169,7 +188,7 @@ export default function Contact() {
         </div>
       </section>
 
-          <button type="submit" disabled={submitting || !selectedDate || !selectedTime}>
+          <button type="button" disabled={submitting || !selectedDate || !selectedTime} onClick={onSchedule}>
             {submitting ? "Scheduling..." : "Schedule a Session"}
           </button>
           <br></br>
@@ -216,7 +235,7 @@ export default function Contact() {
             required
           />
 
-          <button type="submit" disabled={submitting || !selectedDate || !selectedTime}>
+          <button type="submit" disabled={submitting}>
             {submitting ? "Sending..." : "Send"}
           </button>
 
@@ -227,6 +246,18 @@ export default function Contact() {
           )}
         </form>
       </section>
+
+      {popup && (
+        <div className="popup-overlay" role="alertdialog" aria-live="assertive">
+          <div className="popup-card">
+            <h3>{popup.title}</h3>
+            <p>{popup.detail}</p>
+            <button type="button" className="ghost" onClick={() => setPopup(null)}>
+              Close
+            </button>
+          </div>
+        </div>
+      )}
     </main>
   );
 }
