@@ -4,8 +4,8 @@ import immersionIncluded from "./assets/immersion-included-cows.jpg";
 
 export default function SpanishImmersion() {
   return (
-    <main>
-      <h1 className="page-title">
+    <main aria-labelledby="immersion-title">
+      <h1 className="page-title" id="immersion-title">
         Spanish Immersion — Learn Through Land and Community
       </h1>
 

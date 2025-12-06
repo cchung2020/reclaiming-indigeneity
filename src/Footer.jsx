@@ -24,12 +24,12 @@ console.log(cur_temp_outer);
 export default function Footer() {
   const [cur_temp, setTemp] = useState("");
 
-  if (cur_temp != cur_temp_outer) {
+  if (cur_temp !== cur_temp_outer) {
     setTemp(cur_temp_outer);
   }
 
   return (
-    <footer>
+    <footer aria-label="Site footer">
       <div className="footer-brand">
         <img className="footer-logo" src={logo} alt="Casa Romero logo" />
         <p>
@@ -42,6 +42,8 @@ export default function Footer() {
           href="https://reclaimingindigeneity.substack.com/"
           target="_blank"
           rel="noopener noreferrer"
+          className="link-button"
+          aria-label="Subscribe to the Reclaiming Indigeneity Substack newsletter"
         >
           Subscribe on Substack
         </a>

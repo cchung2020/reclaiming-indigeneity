@@ -5,8 +5,8 @@ import aboutWhere from "./assets/about-where-creek.jpg";
 
 export default function About() {
   return (
-    <main>
-      <h1 className="page-title">
+    <main aria-labelledby="about-title">
+      <h1 className="page-title" id="about-title">
         Casa Romero — A Decolonization Retreat Center in Boyacá, Colombia
       </h1>
 
@@ -87,16 +87,23 @@ export default function About() {
           <h2>Offerings</h2>
           <ul>
             <li>
-              <Link to="/spanish-immersion">Spanish Immersion</Link> — learn
-              language through relationship, art, and ecology.
+              <Link to="/spanish-immersion" className="link-button inline">
+                Spanish Immersion
+              </Link>{" "}
+              — learn language through relationship, art, and ecology.
             </li>
             <li>
-              <Link to="/solo-retreats">Solo Retreats</Link> — restorative time
-              for quiet, reflection, and reconnection with nature.
+              <Link to="/solo-retreats" className="link-button inline">
+                Solo Retreats
+              </Link>{" "}
+              — restorative time for quiet, reflection, and reconnection with
+              nature.
             </li>
             <li>
-              <Link to="/jewish-water-rituals">Jewish Water Rituals</Link> —
-              ritual practice at the confluence of tradition and landscape.
+              <Link to="/jewish-water-rituals" className="link-button inline">
+                Jewish Water Rituals
+              </Link>{" "}
+              — ritual practice at the confluence of tradition and landscape.
             </li>
           </ul>
         </section>

@@ -57,9 +57,19 @@ export default function Contact() {
   const [selectedDate, setSelectedDate] = useState(today);
   const [selectedTime, setSelectedTime] = useState("");
 
-  const monthMatrix = useMemo(() => getMonthMatrix(viewYear, viewMonth), [viewYear, viewMonth]);
-  const monthLabel = new Date(viewYear, viewMonth, 1).toLocaleString("en-US", { month: "long", year: "numeric" });
-  const selectedLabel = selectedDate.toLocaleDateString("en-US", { weekday: "long", month: "long", day: "numeric" });
+  const monthMatrix = useMemo(
+    () => getMonthMatrix(viewYear, viewMonth),
+    [viewYear, viewMonth]
+  );
+  const monthLabel = new Date(viewYear, viewMonth, 1).toLocaleString("en-US", {
+    month: "long",
+    year: "numeric",
+  });
+  const selectedLabel = selectedDate.toLocaleDateString("en-US", {
+    weekday: "long",
+    month: "long",
+    day: "numeric",
+  });
 
   function changeMonth(delta) {
     const next = new Date(viewYear, viewMonth + delta, 1);
@@ -81,10 +91,14 @@ export default function Contact() {
     // testing to see if booking payload is showing
     console.log("booking request:", payload);
 
-    setStatus({ type: "ok", text: "Successfully sent. (also in console output)" });
+    setStatus({
+      type: "ok",
+      text: "Successfully sent. (also in console output)",
+    });
     setPopup({
       title: "Message sent",
-      detail: "Thanks for reaching out. We received your note and will follow up soon.",
+      detail:
+        "Thanks for reaching out. We received your note and will follow up soon.",
     });
     setForm({ name: "", email: "", phone_number: "", message: "" });
     setSelectedTime("");
@@ -106,18 +120,19 @@ export default function Contact() {
   }
 
   return (
-    <main>
-      <h1>Get In Touch</h1>
+    <main aria-labelledby="contact-title">
+      <h1 id="contact-title">Get In Touch</h1>
 
-      <section>
+      <section aria-label="Appointment Booking">
         <h2>Book an Appointment</h2>
         <p>
-          Whether you're curious about a retreat, ritual, or immersion experience, or just want to ask questions,
-          I'd love to connect. Use the form below or reach out via email or phone.
+          Whether you're curious about a retreat, ritual, or immersion
+          experience, or just want to ask questions, I'd love to connect. Use
+          the form below or reach out via email or phone.
         </p>
       </section>
 
-      <section>
+      <section aria-label="Contact details">
         <h2>Contact Details</h2>
         <p>Email: rosa@reclaimingindigeneity.com</p>
         <p>Phone: +1 (617) 488-9988</p>
@@ -126,16 +141,26 @@ export default function Contact() {
         </p>
       </section>
 
-      <section className="calendar-card">
+      <section className="calendar-card" aria-label="Schedule a session">
         <div className="calendar-nav">
-          <button type="button" className="ghost" onClick={() => changeMonth(-1)} aria-label="Previous month">
-          </button>
-          <div className="calendar-month">{monthLabel}</div>
-          <button type="button" className="ghost" onClick={() => changeMonth(1)} aria-label="Next month">
-          </button>
+          <button
+            type="button"
+            className="ghost"
+            onClick={() => changeMonth(-1)}
+            aria-label="Previous month"
+          ></button>
+          <div className="calendar-month" aria-live="polite">
+            {monthLabel}
+          </div>
+          <button
+            type="button"
+            className="ghost"
+            onClick={() => changeMonth(1)}
+            aria-label="Next month"
+          ></button>
         </div>
 
-        <div className="calendar-grid">
+        <div className="calendar-grid" aria-label="Select a date">
           {["S", "M", "T", "W", "T", "F", "S"].map((d) => (
             <div key={d} className="calendar-day-head">
               {d}
@@ -144,15 +169,16 @@ export default function Contact() {
           {monthMatrix.map((week, wi) =>
             week.map((day, di) => {
               const isSelected =
-                day.inMonth && day.date.toDateString() === selectedDate.toDateString();
+                day.inMonth &&
+                day.date.toDateString() === selectedDate.toDateString();
               const isToday = day.date.toDateString() === today.toDateString();
               return (
                 <button
                   key={`${wi}-${di}`}
                   type="button"
-                  className={`calendar-cell${day.inMonth ? "" : " muted"}${isSelected ? " selected" : ""}${
-                    isToday && !isSelected ? " today" : ""
-                  }`}
+                  className={`calendar-cell${day.inMonth ? "" : " muted"}${
+                    isSelected ? " selected" : ""
+                  }${isToday && !isSelected ? " today" : ""}`}
                   onClick={() => {
                     if (day.inMonth) {
                       setSelectedDate(day.date);
@@ -160,6 +186,8 @@ export default function Contact() {
                     }
                   }}
                   disabled={!day.inMonth}
+                  aria-pressed={isSelected}
+                  aria-label={day.date.toDateString()}
                 >
                   {day.label}
                 </button>
@@ -180,6 +208,7 @@ export default function Contact() {
                 type="button"
                 className={`time-slot${selectedTime === time ? " active" : ""}`}
                 onClick={() => setSelectedTime(time)}
+                aria-pressed={selectedTime === time}
               >
                 {time}
               </button>
@@ -188,12 +217,16 @@ export default function Contact() {
         </div>
       </section>
 
-          <button type="button" disabled={submitting || !selectedDate || !selectedTime} onClick={onSchedule}>
-            {submitting ? "Scheduling..." : "Schedule a Session"}
-          </button>
-          <br></br>
+      <button
+        type="button"
+        disabled={submitting || !selectedDate || !selectedTime}
+        onClick={onSchedule}
+      >
+        {submitting ? "Scheduling..." : "Schedule a Session"}
+      </button>
+      <br></br>
 
-      <section>
+      <section aria-label="Send a message">
         <h2>Send a Message</h2>
         <form onSubmit={onSubmit}>
           <label htmlFor="name">Name</label>
@@ -240,7 +273,10 @@ export default function Contact() {
           </button>
 
           {status.text && (
-            <p role="status" style={{ color: status.type === "ok" ? "green" : "crimson" }}>
+            <p
+              role="status"
+              style={{ color: status.type === "ok" ? "green" : "crimson" }}
+            >
               {status.text}
             </p>
           )}
@@ -248,11 +284,22 @@ export default function Contact() {
       </section>
 
       {popup && (
-        <div className="popup-overlay" role="alertdialog" aria-live="assertive">
+        <div
+          className="popup-overlay"
+          role="alertdialog"
+          aria-live="assertive"
+          aria-modal="true"
+          aria-labelledby="popup-title"
+          aria-describedby="popup-detail"
+        >
           <div className="popup-card">
             <h3>{popup.title}</h3>
             <p>{popup.detail}</p>
-            <button type="button" className="ghost" onClick={() => setPopup(null)}>
+            <button
+              type="button"
+              className="ghost"
+              onClick={() => setPopup(null)}
+            >
               Close
             </button>
           </div>

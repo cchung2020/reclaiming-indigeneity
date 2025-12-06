@@ -4,8 +4,8 @@ import retreatsRhythm from "./assets/retreats-rhythm-flower.jpg";
 
 export default function SoloRetreats() {
   return (
-    <main>
-      <h1 className="page-title">
+    <main aria-labelledby="retreats-title">
+      <h1 className="page-title" id="retreats-title">
         Solo Retreats — Time for Stillness and Reconnection
       </h1>
 

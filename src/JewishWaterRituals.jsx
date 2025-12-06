@@ -4,8 +4,8 @@ import waterRiver from "./assets/water-river-crossing.jpg";
 
 export default function JewishWaterRituals() {
   return (
-    <main>
-      <h1 className="page-title">
+    <main aria-labelledby="water-title">
+      <h1 className="page-title" id="water-title">
         Jewish Water Rituals — Returning to the Flow of Creation
       </h1>
 
