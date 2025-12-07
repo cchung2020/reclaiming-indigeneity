@@ -11,9 +11,8 @@ if (!global._mongoClientPromise) {
 }
 clientPromise = global._mongoClientPromise;
 
-export default async function handler(req, res) {
-  console.log("login.js doing something")
 
+export default async function handler(req, res) {
   if (req.method !== "POST") {
     res.status(405).json({ ok: false, message: "Method not allowed" });
     return;
@@ -23,14 +22,9 @@ export default async function handler(req, res) {
     const { email, password } =
       typeof req.body === "string" ? JSON.parse(req.body || "{}") : req.body;
 
-    // if (!name || !email || !message) {
-    //   res.status(400).json({ ok: false, message: "Missing required fields" });
-    //   return;
-    // }
-
     const mongo_client = await clientPromise;
     const db = mongo_client.db("ReclaimingIndigeneity");
-    console.log("finished awaiting thing")
+    console.log("finished awaiting promise")
 
     const client = await db.collection("Clients").findOne({email: email, password: password});
  
