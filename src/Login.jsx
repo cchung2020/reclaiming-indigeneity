@@ -1,7 +1,7 @@
 import { useState } from "react";
 
 export default function Login() {
-  const [form, setForm] = useState({
+  const [loginForm, setLoginForm] = useState({
     email: "",
     password: "",
   });
@@ -15,13 +15,13 @@ export default function Login() {
     console.log("logged in?", logged_in);
   }
 
-  async function onSubmit(e) {
+  async function onLoginSubmit(e) {
     e.preventDefault();
 
     const login_res = await fetch("/api/login", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(form),
+      body: JSON.stringify(loginForm),
     });
 
     const data = await login_res.json();
@@ -36,6 +36,9 @@ export default function Login() {
     }
   }
 
+
+
+//   return the actual HTML
   if (logged_in) {
     return (
       <main aria-labelledby="login-title">
@@ -46,16 +49,26 @@ export default function Login() {
   } else {
     return (
       <main aria-labelledby="login-title">
-        <h1 id="login-title">Login</h1>
 
-        <form onSubmit={onSubmit}>
+        {/*Account creation form*/}
+        <h1 id="account-creation">Create Account</h1>
+        {/* <form>
+            <label htmlFor="email">Email</label>
+            <input
+                ""
+
+        </form> */}
+
+        {/*login form */}
+        <h1 id="login-title">Login</h1>
+        <form onSubmit={onLoginSubmit}>
           <label htmlFor="email">Email</label>
           <input
             id="email"
             name="email"
             type="email"
-            value={form.email}
-            onChange={(e) => setForm({ ...form, email: e.target.value })}
+            value={loginForm.email}
+            onChange={(e) => setLoginForm({ ...loginForm, email: e.target.value })}
             required
           />
 
@@ -64,8 +77,8 @@ export default function Login() {
             id="password"
             name="password"
             type="password"
-            value={form.password}
-            onChange={(e) => setForm({ ...form, password: e.target.value })}
+            value={loginForm.password}
+            onChange={(e) => setLoginForm({ ...loginForm, password: e.target.value })}
             required
           />
 
