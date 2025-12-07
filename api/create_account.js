@@ -20,7 +20,24 @@ export default async function handler(req, res) {
     return;
   }
 
+  try {
+    const { email, password } =
+      typeof req.body === "string" ? JSON.parse(req.body || "{}") : req.body;
 
+    const mongo_client = await clientPromise;
+    const db = mongo_client.db("ReclaimingIndigeneity");
+    console.log("finished awaiting promise for database")
+
+    const client_collection = await db.collection("Clients");
+    const insertionResult = await client_collection.insertOne({email: email, password: password});
+    console.log(insertionResult);
+
+
+
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ ok: false, message: "Server error" });
+  }
 
 
 }
