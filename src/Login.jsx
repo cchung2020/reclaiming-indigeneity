@@ -5,6 +5,10 @@ export default function Login() {
     email: "",
     password: "",
   });
+  const [createAccForm, setCreatAccForm] = useState({
+    email: "",
+    password: "",
+  })
 
   const initialy_logged_in = localStorage.getItem("logged_in") !== null;
   const [logged_in, setLoggedIn] = useState(initialy_logged_in);
@@ -52,12 +56,29 @@ export default function Login() {
 
         {/*Account creation form*/}
         <h1 id="account-creation">Create Account</h1>
-        {/* <form>
+        <form>
             <label htmlFor="email">Email</label>
             <input
-                ""
+                id="email"
+                name="email"
+                type="email"
+                value={createAccForm.email}
+                onChange={(e) => setCreatAccForm({ ...createAccForm, email: e.target.value})}
+                required
+            />
+            
+            <label htmlFor="password">Password</label>
+            <input
+                id="password"
+                name="password"
+                type="password"
+                value={createAccForm.password}
+                onChange={(e) => setCreatAccForm({ ...createAccForm, password: e.target.value})}
+                required
+            />
+            <button type="submit">Submit</button>
 
-        </form> */}
+        </form>
 
         {/*login form */}
         <h1 id="login-title">Login</h1>
