@@ -1,4 +1,6 @@
 import { MongoClient, ServerApiVersion } from "mongodb";
+import { hashSync } from "bcryptjs";
+
 
 let client;
 let clientPromise;
@@ -29,7 +31,8 @@ export default async function handler(req, res) {
     console.log("finished awaiting promise for database")
 
     const client_collection = await db.collection("Clients");
-    const insertionResult = await client_collection.insertOne({email: email, password: password});
+    const pw_hash = hashSync(password, 10);
+    await client_collection.insertOne({email: email, password: pw_hash});
 
     res.status(200).json({ ok: true });
 

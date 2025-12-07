@@ -1,4 +1,6 @@
 import { MongoClient, ServerApiVersion } from "mongodb";
+import { compareSync } from "bcryptjs";
+
 
 let client;
 let clientPromise;
@@ -26,9 +28,17 @@ export default async function handler(req, res) {
     const db = mongo_client.db("ReclaimingIndigeneity");
     console.log("finished awaiting promise")
 
-    const client = await db.collection("Clients").findOne({email: email, password: password});
- 
+    const client = await db.collection("Clients").findOne({email: email});
+    var matches = false;
     if (client) {
+      const pw_hash = client.password;
+      console.log(client)
+      if (compareSync(password, pw_hash)) {
+        matches = true;
+      }
+    }
+
+    if (matches) {
       res.status(200).json({ ok: true })
     } else {
       console.log("saying bad username or password")
