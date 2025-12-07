@@ -30,9 +30,8 @@ export default async function handler(req, res) {
 
     const client_collection = await db.collection("Clients");
     const insertionResult = await client_collection.insertOne({email: email, password: password});
-    console.log(insertionResult);
 
-
+    res.status(200).json({ ok: true });
 
   } catch (err) {
     console.error(err);

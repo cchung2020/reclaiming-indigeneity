@@ -28,6 +28,15 @@ export default function Login() {
         body: JSON.stringify(createAccForm)
     });
 
+    const data = await creation_res.json();
+    console.log(data);
+
+    if (creation_res.ok) {
+        setLoggedIn(true);
+        localStorage.setItem("logged_in", "yes")
+    } else {
+        window.alert("account creation failed")
+    }
 
   }
 
@@ -73,7 +82,7 @@ export default function Login() {
         <form onSubmit={onCreateAccountSubmit}>
             <label htmlFor="email">Email</label>
             <input
-                id="email"
+                id="creation-email"
                 name="email"
                 type="email"
                 value={createAccForm.email}
@@ -83,7 +92,7 @@ export default function Login() {
             
             <label htmlFor="password">Password</label>
             <input
-                id="password"
+                id="dreation-password"
                 name="password"
                 type="password"
                 value={createAccForm.password}
@@ -99,7 +108,7 @@ export default function Login() {
         <form onSubmit={onLoginSubmit}>
           <label htmlFor="email">Email</label>
           <input
-            id="email"
+            id="login-email"
             name="email"
             type="email"
             value={loginForm.email}
@@ -109,7 +118,7 @@ export default function Login() {
 
           <label htmlFor="password">Password</label>
           <input
-            id="password"
+            id="login-password"
             name="password"
             type="password"
             value={loginForm.password}
