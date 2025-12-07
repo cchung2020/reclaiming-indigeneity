@@ -37,6 +37,8 @@ export default function Login() {
     if (login_res.ok) {
       setLoggedIn(true);
       localStorage.setItem("logged_in", "yes");
+    } else {
+        window.alert("Incorrect username or password, please try again")
     }
   }
 
