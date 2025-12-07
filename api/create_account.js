@@ -1,5 +1,5 @@
 import { MongoClient, ServerApiVersion } from "mongodb";
-import { compareSync } from "bcryptjs";
+import { hashSync } from "bcryptjs";
 
 
 let client;
@@ -15,6 +15,8 @@ clientPromise = global._mongoClientPromise;
 
 
 export default async function handler(req, res) {
+  console.log("account creation handler running")
+
   if (req.method !== "POST") {
     res.status(405).json({ ok: false, message: "Method not allowed" });
     return;
@@ -26,25 +28,18 @@ export default async function handler(req, res) {
 
     const mongo_client = await clientPromise;
     const db = mongo_client.db("ReclaimingIndigeneity");
-    console.log("finished awaiting promise")
+    console.log("finished awaiting promise for database")
 
-    const client = await db.collection("Clients").findOne({email: email});
-    var matches = false;
-    if (client) {
-      const pw_hash = client.password;
-      if (compareSync(password, pw_hash)) {
-        matches = true;
-      }
-    }
+    const client_collection = await db.collection("Clients");
+    const pw_hash = hashSync(password, 10);
+    await client_collection.insertOne({email: email, password: pw_hash});
 
-    if (matches) {
-      res.status(200).json({ ok: true })
-    } else {
-      console.log("saying bad username or password")
-      res.status(401).json( {error: "bad username or password"} );
-    }
+    res.status(200).json({ ok: true });
+
   } catch (err) {
     console.error(err);
     res.status(500).json({ ok: false, message: "Server error" });
   }
+
+
 }
