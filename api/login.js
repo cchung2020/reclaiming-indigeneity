@@ -32,7 +32,6 @@ export default async function handler(req, res) {
     var matches = false;
     if (client) {
       const pw_hash = client.password;
-      console.log(client)
       if (compareSync(password, pw_hash)) {
         matches = true;
       }
