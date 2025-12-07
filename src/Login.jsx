@@ -19,6 +19,18 @@ export default function Login() {
     console.log("logged in?", logged_in);
   }
 
+  async function onCreateAccountSubmit(e) {
+    e.preventDefault();
+
+    const creation_res = await fetch("api/create_account", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(createAccForm)
+    });
+
+
+  }
+
   async function onLoginSubmit(e) {
     e.preventDefault();
 
@@ -58,7 +70,7 @@ export default function Login() {
 
         {/*Account creation form*/}
         <h1 id="account-creation">Create Account</h1>
-        <form>
+        <form onSubmit={onCreateAccountSubmit}>
             <label htmlFor="email">Email</label>
             <input
                 id="email"
