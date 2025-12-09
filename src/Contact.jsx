@@ -124,7 +124,7 @@ export default function Contact() {
 
     if (!isLoggedIn) {
       window.alert("You must be logged in to schedule a session.");
-      window.location.href = "/login"; 
+      //window.location.href = "/login"; 
       return;
     }
 
