@@ -119,7 +119,7 @@ export default function Contact() {
     setSubmitting(false);
   }
 
-  function onSchedule() {
+  async function onSchedule() {
     const isLoggedIn = localStorage.getItem("logged_in") !== null;
 
     if (!isLoggedIn) {
@@ -134,16 +134,49 @@ export default function Contact() {
     // }
 
     if (!selectedDate || !selectedTime) return;
-    const payload = {
-      ...form,
-      preferred_date: selectedDate.toISOString(),
-      preferred_time: selectedTime,
-    };
-    console.log("schedule request:", payload);
-    setPopup({
-      title: "Session scheduled",
-      detail: `${selectedLabel} at ${selectedTime}. We'll confirm details soon.`,
-    });
+    setSubmitting(true);
+    setStatus({ type: "", text: "" });
+
+    // Build booking_date as ISO using selectedDate + selectedTime
+    function timeToDate(ts) {
+      const [time, modifier] = ts.split(" ");
+      let [hours, minutes] = time.split(":").map(Number);
+      if (modifier === "PM" && hours !== 12) hours += 12;
+      if (modifier === "AM" && hours === 12) hours = 0;
+      const d = new Date(selectedDate);
+      d.setHours(hours, minutes, 0, 0);
+      return d;
+    }
+    const bookingDate = timeToDate(selectedTime).toISOString();
+
+    try {
+      const res = await fetch("/api/bookings", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          client_id: localStorage.getItem("client_id") || null, // adjust if you store it differently
+          course_id: null, // set or pass actual course id if applicable
+          booking_date: bookingDate,
+        }),
+      });
+
+      const data = await res.json();
+      if (!res.ok) {
+        throw new Error(data.message || "Failed to schedule");
+      }
+
+      setPopup({
+        title: "Session scheduled",
+        detail: `${selectedLabel} at ${selectedTime}. We'll confirm details soon.`,
+      });
+      setStatus({ type: "ok", text: "Session scheduled." });
+    } catch (err) {
+      console.error(err);
+      setStatus({ type: "error", text: "Failed to schedule session." });
+      window.alert("Scheduling failed. Please try again.");
+    } finally {
+      setSubmitting(false);
+    }
   }
 
   return (
