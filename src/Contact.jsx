@@ -18,7 +18,6 @@ const timeOptions = [
   "7:00 PM",
 ];
 
-const isLoggedIn = localStorage.getItem("logged_in") !== null;
 
 function getMonthMatrix(year, month) {
   const first = new Date(year, month, 1);
@@ -121,6 +120,8 @@ export default function Contact() {
   }
 
   function onSchedule() {
+    const isLoggedIn = localStorage.getItem("logged_in") !== null;
+    
     // if (!isLoggedIn) {
     //   window.alert("You must be logged in to schedule a session.");
     //   window.location.href = "/login"; 
