@@ -171,21 +171,25 @@ export default function Contact() {
               const isSelected =
                 day.inMonth &&
                 day.date.toDateString() === selectedDate.toDateString();
+
               const isToday = day.date.toDateString() === today.toDateString();
+
+              const isPastDate = day.date < new Date(today.getFullYear(), today.getMonth(), today.getDate());
+              
               return (
                 <button
                   key={`${wi}-${di}`}
                   type="button"
-                  className={`calendar-cell${day.inMonth ? "" : " muted"}${
+                  className={`calendar-cell${day.inMonth && !isPastDate ? "" : " muted"}${
                     isSelected ? " selected" : ""
                   }${isToday && !isSelected ? " today" : ""}`}
                   onClick={() => {
-                    if (day.inMonth) {
+                    if (day.inMonth && !isPastDate) {
                       setSelectedDate(day.date);
                       setSelectedTime("");
                     }
                   }}
-                  disabled={!day.inMonth}
+                  disabled={!day.inMonth || isPastDate}
                   aria-pressed={isSelected}
                   aria-label={day.date.toDateString()}
                 >
@@ -202,17 +206,36 @@ export default function Contact() {
             <small>Choose a time</small>
           </div>
           <div className="times-grid">
-            {timeOptions.map((time) => (
-              <button
-                key={time}
-                type="button"
-                className={`time-slot${selectedTime === time ? " active" : ""}`}
-                onClick={() => setSelectedTime(time)}
-                aria-pressed={selectedTime === time}
-              >
-                {time}
-              </button>
-            ))}
+            {timeOptions.map((time) => {
+              function timeToDate(ts) {
+                const [time, modifier] = ts.split(" ");
+                let [hours, minutes] = time.split(":").map(Number);
+                if (modifier === "PM" && hours !== 12) hours += 12;
+                if (modifier === "AM" && hours === 12) hours = 0;
+
+                const d = new Date(selectedDate);
+                d.setHours(hours, minutes, 0, 0);
+                return d;
+              }
+
+              const slotDate = timeToDate(time);
+              const isPastTime =
+                selectedDate.toDateString() === today.toDateString() &&
+                slotDate < new Date();
+
+              return (
+                <button
+                  key={time}
+                  type="button"
+                  className={`time-slot${selectedTime === time ? " active" : ""}`}
+                  onClick={() => !isPastTime && setSelectedTime(time)}
+                  aria-pressed={selectedTime === time}
+                  disabled={isPastTime}    // ⬅ disable past times today
+                >
+                  {time}
+                </button>
+              );
+            })}
           </div>
         </div>
       </section>

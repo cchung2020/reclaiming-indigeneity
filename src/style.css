@@ -457,3 +457,8 @@ button.ghost {
     font-size: 0.95rem;
   }
 }
+
+.time-slot:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
