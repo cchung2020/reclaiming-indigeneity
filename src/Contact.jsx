@@ -121,12 +121,12 @@ export default function Contact() {
 
   function onSchedule() {
     const isLoggedIn = localStorage.getItem("logged_in") !== null;
-    
-    // if (!isLoggedIn) {
-    //   window.alert("You must be logged in to schedule a session.");
-    //   window.location.href = "/login"; 
-    //   return;
-    // }
+
+    if (!isLoggedIn) {
+      window.alert("You must be logged in to schedule a session.");
+      window.location.href = "/login"; 
+      return;
+    }
 
     // if (!selectedTime) {
     //   window.alert("You must select a time to schedule a session.");
