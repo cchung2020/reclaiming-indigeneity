@@ -12,6 +12,37 @@ if (!global._mongoClientPromise) {
 clientPromise = global._mongoClientPromise;
 
 export default async function handler(req, res) {
+  if (req.method === "GET") {
+    const { date } = req.query || {};
+    if (!date) {
+      res.status(400).json({ ok: false, message: "date is required" });
+      return;
+    }
+
+    try {
+      const day = new Date(date);
+      const start = new Date(day);
+      start.setUTCHours(0, 0, 0, 0);
+      const end = new Date(start);
+      end.setUTCDate(end.getUTCDate() + 1);
+
+      const mongoClient = await clientPromise;
+      const db = mongoClient.db("ReclaimingIndigeneity");
+      const bookings = await db
+        .collection("Bookings")
+        .find({ booking_date: { $gte: start, $lt: end } })
+        .project({ _id: 0, booking_date: 1 })
+        .toArray();
+
+      res.status(200).json({ ok: true, bookings });
+      return;
+    } catch (err) {
+      console.error(err);
+      res.status(500).json({ ok: false, message: "Server error" });
+      return;
+    }
+  }
+
   if (req.method !== "POST") {
     res.status(405).json({ ok: false, message: "Method not allowed" });
     return;

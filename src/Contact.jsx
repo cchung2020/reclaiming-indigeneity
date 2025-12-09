@@ -1,5 +1,5 @@
 // src/Contact.jsx
-import { useMemo, useState } from "react";
+import { useMemo, useState, useEffect } from "react";
 
 const timeOptions = [
   "10:00 AM",
@@ -18,6 +18,12 @@ const timeOptions = [
   "7:00 PM",
 ];
 
+function formatSlotLabel(dateString) {
+  return new Date(dateString).toLocaleTimeString("en-US", {
+    hour: "numeric",
+    minute: "2-digit",
+  });
+}
 
 function getMonthMatrix(year, month) {
   const first = new Date(year, month, 1);
@@ -57,6 +63,37 @@ export default function Contact() {
   const [viewMonth, setViewMonth] = useState(today.getMonth());
   const [selectedDate, setSelectedDate] = useState(today);
   const [selectedTime, setSelectedTime] = useState("");
+
+  const [bookedTimes, setBookedTimes] = useState(new Set());
+  useEffect(() => {
+    let cancelled = false;
+
+    async function fetchBookings() {
+      try {
+        const res = await fetch(`/api/bookings?date=${selectedDate.toISOString()}`);
+        const data = await res.json();
+        if (!res.ok) throw new Error(data.message || "Failed to fetch bookings");
+
+        const bookedLabels = (data.bookings || []).map((b) =>
+          formatSlotLabel(b.booking_date)
+        );
+        if (cancelled) return;
+        setBookedTimes(new Set(bookedLabels));
+
+        if (bookedLabels.includes(selectedTime)) {
+          setSelectedTime("");
+        }
+      } catch (err) {
+        console.error("Failed to load booked times", err);
+        if (!cancelled) setBookedTimes(new Set());
+      }
+    }
+
+    fetchBookings();
+    return () => {
+      cancelled = true;
+    };
+  }, [selectedDate, selectedTime]);
 
   const monthMatrix = useMemo(
     () => getMonthMatrix(viewYear, viewMonth),
@@ -170,6 +207,11 @@ export default function Contact() {
         detail: `${selectedLabel} at ${selectedTime}. We'll confirm details soon.`,
       });
       setStatus({ type: "ok", text: "Session scheduled." });
+      setBookedTimes((prev) => {
+        const next = new Set(prev);
+        next.add(selectedTime);
+        return next;
+      });
     } catch (err) {
       console.error(err);
       setStatus({ type: "error", text: "Failed to schedule session." });
@@ -282,6 +324,7 @@ export default function Contact() {
               const isPastTime =
                 selectedDate.toDateString() === today.toDateString() &&
                 slotDate < new Date();
+              const isBooked = bookedTimes.has(time);
 
               return (
                 <button
@@ -290,9 +333,9 @@ export default function Contact() {
                   className={`time-slot${selectedTime === time ? " active" : ""}`}
                   onClick={() => !isPastTime && setSelectedTime(time)}
                   aria-pressed={selectedTime === time}
-                  disabled={isPastTime}    // ⬅ disable past times today
+                  disabled={isPastTime || isBooked}    // ⬅ disable past times today
                 >
-                  {time}
+                  {time}{isBooked ? " (booked)" : ""}
                 </button>
               );
             })}
