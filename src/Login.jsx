@@ -21,7 +21,7 @@ export default function Login() {
   }
 
   async function onCreateAccountSubmit(e) {
-    e.preventDefault();
+    e.preventDefault()
 
     const creation_res = await fetch("api/create_account", {
         method: "POST",
@@ -33,6 +33,7 @@ export default function Login() {
     console.log(data);
 
     if (creation_res.ok) {
+        setCreatAccForm({email: "", password: ""})
         setLoggedIn(true);
         localStorage.setItem("logged_in", "yes")
     } else {
@@ -80,7 +81,7 @@ export default function Login() {
 
         {/*Account creation form*/}
         <h1 id="account-creation">Create Account</h1>
-        <form onSubmit={onCreateAccountSubmit}>
+        <form id="acc-creation-form" onSubmit={onCreateAccountSubmit}>
             <label htmlFor="email">Email</label>
             <input
                 id="creation-email"
@@ -93,9 +94,11 @@ export default function Login() {
             
             <label htmlFor="password">Password</label>
             <input
-                id="dreation-password"
+                id="creation-password"
                 name="password"
                 type="password"
+                pattern=".{10,}"
+                title="Must contain at least 10 characters"
                 value={createAccForm.password}
                 onChange={(e) => setCreatAccForm({ ...createAccForm, password: e.target.value})}
                 required
