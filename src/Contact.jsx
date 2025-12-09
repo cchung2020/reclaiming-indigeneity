@@ -18,6 +18,8 @@ const timeOptions = [
   "7:00 PM",
 ];
 
+const isLoggedIn = localStorage.getItem("logged_in") !== null;
+
 function getMonthMatrix(year, month) {
   const first = new Date(year, month, 1);
   const startDay = first.getDay(); // 0 = Sunday
@@ -106,6 +108,17 @@ export default function Contact() {
   }
 
   function onSchedule() {
+    if (!isLoggedIn) {
+      window.alert("You must be logged in to schedule a session.");
+      window.location.href = "/login"; 
+      return;
+    }
+
+    // if (!selectedTime) {
+    //   window.alert("You must select a time to schedule a session.");
+    //   return;
+    // }
+
     if (!selectedDate || !selectedTime) return;
     const payload = {
       ...form,
