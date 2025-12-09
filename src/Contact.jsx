@@ -90,29 +90,42 @@ export default function Contact() {
       preferred_time: selectedTime,
     };
 
-    // testing to see if booking payload is showing
-    console.log("booking request:", payload);
+    try {
+      const res = await fetch("/api/contact", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(payload),
+      });
 
-    setStatus({
-      type: "ok",
-      text: "Successfully sent. (also in console output)",
-    });
-    setPopup({
-      title: "Message sent",
-      detail:
-        "Thanks for reaching out. We received your note and will follow up soon.",
-    });
-    setForm({ name: "", email: "", phone_number: "", message: "" });
-    setSelectedTime("");
+      const data = await res.json();
+
+      if (!res.ok) {
+        throw new Error(data.message || "Failed to submit");
+      }
+
+      setStatus({ type: "ok", text: "Successfully sent." });
+      setPopup({
+        title: "Message sent",
+        detail: "Thanks for reaching out. We received your note and will follow up soon.",
+      });
+
+      setForm({ name: "", email: "", phone_number: "", message: "" });
+      setSelectedTime("");
+      
+    } catch (err) {
+      setStatus({ type: "error", text: "Failed to send message." });
+      console.error(err);
+    }
+
     setSubmitting(false);
   }
 
   function onSchedule() {
-    if (!isLoggedIn) {
-      window.alert("You must be logged in to schedule a session.");
-      window.location.href = "/login"; 
-      return;
-    }
+    // if (!isLoggedIn) {
+    //   window.alert("You must be logged in to schedule a session.");
+    //   window.location.href = "/login"; 
+    //   return;
+    // }
 
     // if (!selectedTime) {
     //   window.alert("You must select a time to schedule a session.");
