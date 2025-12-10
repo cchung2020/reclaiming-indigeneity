@@ -360,7 +360,8 @@ button:active {
 }
 
 .calendar-cell.muted {
-  color: rgba(232, 220, 197, 0.35);
+  color: rgba(232, 220, 197, 0.6);
+  background-color: rgb(31, 27, 27);
   cursor: not-allowed;
 }
 
@@ -459,6 +460,7 @@ button.ghost {
 }
 
 .time-slot:disabled {
-  opacity: 0.4;
+  color: rgba(232, 220, 197, 0.6);
+  background-color: rgb(31, 27, 27);
   cursor: not-allowed;
 }
