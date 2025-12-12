@@ -1,4 +1,6 @@
 import { MongoClient, ServerApiVersion, ObjectId } from "mongodb";
+import pkg from "jwt-simple"
+const { decode } = pkg;
 
 let client;
 let clientPromise;
@@ -10,6 +12,8 @@ if (!global._mongoClientPromise) {
   global._mongoClientPromise = client.connect();
 }
 clientPromise = global._mongoClientPromise;
+
+const secret = process.env.SECRET;
 
 export default async function handler(req, res) {
   if (req.method === "GET") {
@@ -48,7 +52,17 @@ export default async function handler(req, res) {
     return;
   }
 
-  console.log('auth header:', req.headers['x-auth']);
+  const token = req.headers['x-auth'];
+
+  // the JWT processing is partly copied from the textbook
+  try {
+    const decoded_token = decode(token, secret);
+    console.log("booking appointment for ", decoded_token)
+  }
+  catch (ex) {
+    res.status(401).json({ error: "Invalid JWT" });
+  }
+
 
   try {
     const body = typeof req.body === "string" ? JSON.parse(req.body || "{}") : req.body;
