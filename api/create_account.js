@@ -1,6 +1,7 @@
 import { MongoClient, ServerApiVersion } from "mongodb";
 import { hashSync } from "bcryptjs";
-
+import pkg from "jwt-simple"
+const { encode } = pkg;
 
 let client;
 let clientPromise;
@@ -13,6 +14,7 @@ if (!global._mongoClientPromise) {
 }
 clientPromise = global._mongoClientPromise;
 
+const secret = process.env.SECRET;
 
 export default async function handler(req, res) {
   console.log("account creation handler running")
@@ -26,6 +28,9 @@ export default async function handler(req, res) {
     const { email, password } =
       typeof req.body === "string" ? JSON.parse(req.body || "{}") : req.body;
 
+    const token = encode(email, secret);
+    console.log('JWT generated:', token)
+
     const mongo_client = await clientPromise;
     const db = mongo_client.db("ReclaimingIndigeneity");
     console.log("finished awaiting promise for database")
@@ -34,7 +39,7 @@ export default async function handler(req, res) {
     const pw_hash = hashSync(password, 10);
     await client_collection.insertOne({email: email, password: pw_hash});
 
-    res.status(200).json({ ok: true });
+    res.status(200).json({ ok: true, token: token });
 
   } catch (err) {
     console.error(err);
