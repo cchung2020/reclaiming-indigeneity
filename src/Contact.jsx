@@ -158,6 +158,8 @@ export default function Contact() {
 
   async function onSchedule() {
     const isLoggedIn = localStorage.getItem("login_token") !== null;
+    const loginToken = localStorage.getItem("login_token");
+    console.log("token", loginToken);
 
     if (!isLoggedIn) {
       window.alert("You must be logged in to schedule a session.");
@@ -189,7 +191,7 @@ export default function Contact() {
     try {
       const res = await fetch("/api/bookings", {
         method: "POST",
-        headers: { "Content-Type": "application/json" },
+        headers: { "Content-Type": "application/json", "X-Auth": loginToken },
         body: JSON.stringify({
           client_id: localStorage.getItem("client_id") || null, // adjust if you store it differently
           course_id: null, // set or pass actual course id if applicable

@@ -48,6 +48,8 @@ export default async function handler(req, res) {
     return;
   }
 
+  console.log('auth header:', req.headers['x-auth']);
+
   try {
     const body = typeof req.body === "string" ? JSON.parse(req.body || "{}") : req.body;
     const { client_id, course_id, booking_date } = body;
