@@ -157,7 +157,7 @@ export default function Contact() {
   }
 
   async function onSchedule() {
-    const isLoggedIn = localStorage.getItem("logged_in") !== null;
+    const isLoggedIn = localStorage.getItem("login_token") !== null;
 
     if (!isLoggedIn) {
       window.alert("You must be logged in to schedule a session.");
