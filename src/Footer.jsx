@@ -24,7 +24,7 @@ console.log(cur_temp_outer);
 
 export default function Footer() {
   const { i18n, t } = useTranslation();
-  const [cur_temp, setTemp] = useState("");
+  const [cur_temp, setTemp] = useState("test");
 
   if (cur_temp !== cur_temp_outer) {
     setTemp(cur_temp_outer);
@@ -37,7 +37,7 @@ export default function Footer() {
         <p>
           &copy; Reclaiming Indigeneity
           &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
-          {t("footer.tempLabel")}
+          {t("footer.tempLabel")}: {cur_temp}  &deg;F
           &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
         </p>
         <a
