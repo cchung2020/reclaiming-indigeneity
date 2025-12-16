@@ -60,18 +60,19 @@ export default function Header() {
           {t("nav.login")}
         </NavLink>
       </nav>
-          <div className="lang-dropdown">
-            <span className="lang-label">Language</span>
-            <select
-              id="language-select"
-              value={i18n.language}
-              onChange={handleLanguageChange}
-            >
-              <option value="en">EN</option>
-              <option value="es">ES</option>
-              <option value="he">HE</option>
-            </select>
-          </div>
+      <div className="lang-dropdown">
+        <span className="lang-label">Language</span>
+        <select
+          id="language-select"
+          className="lang-select"
+          value={i18n.language}
+          onChange={handleLanguageChange}
+        >
+          <option value="en">EN</option>
+          <option value="es">ES</option>
+          <option value="he">HE</option>
+        </select>
+      </div>
     </header>
   );
 }

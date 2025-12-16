@@ -482,3 +482,22 @@ button.ghost {
   text-transform: uppercase;
 }
 
+.lang-select {
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  border: none;
+  padding: 0.45rem 1rem;
+  border-radius: 0.6rem;
+  background: var(--green);
+  color: #0d0f0c;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.15s, color 0.15s, transform 0.02s;
+}
+
+.lang-select:hover {
+  background: var(--orange);
+  color: #1d140f;
+  transform: translateY(1px);
+}
