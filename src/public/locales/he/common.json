@@ -35,5 +35,16 @@
 
   "footer.tempLabel": "טמפרטורה נוכחית בקולומביה: {{temp}} °F",
   "footer.subscribe": "הירשם ל-Substack",
-  "footer.logoAlt": "לוגו קאסה רומרו"
+  "footer.logoAlt": "לוגו קאסה רומרו",
+
+  "login.titleLoggedIn": "אתה מחובר",
+  "login.logout": "להתנתק?",
+  "login.createTitle": "יצירת חשבון",
+  "login.loginTitle": "כניסה",
+  "login.email": "אימייל",
+  "login.password": "סיסמה",
+  "login.passwordHint": "חייבת להכיל לפחות 10 תווים",
+  "login.submit": "שלח",
+  "login.createFailed": "יצירת החשבון נכשלה",
+  "login.loginFailed": "שם משתמש או סיסמה שגויים, נסה שוב"
 }

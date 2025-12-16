@@ -35,5 +35,17 @@
 
   "footer.tempLabel": "Current temperature in Colombia: {{temp}} °F",
   "footer.subscribe": "Subscribe on Substack",
-  "footer.logoAlt": "Casa Romero logo"
+  "footer.logoAlt": "Casa Romero logo",
+
+  "login.titleLoggedIn" : "You are logged in",
+  "login.logout": "Log out?",
+  "login.createTitle": "Create Account",
+  "login.loginTitle": "Login",
+  "login.email": "Email",
+  "login.password": "Password",
+  "login.passwordHint": "Must contain at least 10 characters",
+  "login.submit": "Submit",
+  "login.createFailed": "Account creation failed",
+  "login.loginFailed": "Incorrect username or password, please try again"
+
 }

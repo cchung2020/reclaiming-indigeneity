@@ -35,5 +35,16 @@
 
   "footer.tempLabel": "Temperatura actual en Colombia: {{temp}} °F",
   "footer.subscribe": "Suscríbete en Substack",
-  "footer.logoAlt": "Logotipo de Casa Romero"
+  "footer.logoAlt": "Logotipo de Casa Romero",
+  
+  "login.titleLoggedIn": "Has iniciado sesión",
+  "login.logout": "¿Cerrar sesión?",
+  "login.createTitle": "Crear cuenta",
+  "login.loginTitle": "Iniciar sesión",
+  "login.email": "Correo electrónico",
+  "login.password": "Contraseña",
+  "login.passwordHint": "Debe tener al menos 10 caracteres",
+  "login.submit": "Enviar",
+  "login.createFailed": "La creación de la cuenta falló",
+  "login.loginFailed": "Usuario o contraseña incorrectos, inténtalo de nuevo"
 }

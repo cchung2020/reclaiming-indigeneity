@@ -1,7 +1,8 @@
 import { useState } from "react";
-
+import { useTranslation } from "react-i18next";
 
 export default function Login() {
+  const { i18n, t } = useTranslation();
   const [loginForm, setLoginForm] = useState({
     email: "",
     password: "",
@@ -73,8 +74,8 @@ export default function Login() {
   if (logged_in) {
     return (
       <main aria-labelledby="login-title">
-        <h1 id="login-title">You are logged in</h1>
-        <button onClick={logOut}>Log out?</button>
+        <h1 id="login-title">{t("login.titleLoggedIn")}</h1>
+        <button onClick={logOut}>{t("login.logout")}</button>
       </main>
     );
   } else {
@@ -82,9 +83,9 @@ export default function Login() {
       <main aria-labelledby="login-title">
 
         {/*Account creation form*/}
-        <h1 id="account-creation">Create Account</h1>
+        <h1 id="account-creation">{t("login.createTitle")}</h1>
         <form id="acc-creation-form" onSubmit={onCreateAccountSubmit}>
-            <label htmlFor="email">Email</label>
+            <label htmlFor="email">{t("login.email")}</label>
             <input
                 id="creation-email"
                 name="email"
@@ -94,25 +95,25 @@ export default function Login() {
                 required
             />
             
-            <label htmlFor="password">Password</label>
+            <label htmlFor="password">{t("login.password")}</label>
             <input
                 id="creation-password"
                 name="password"
                 type="password"
                 pattern=".{10,}"
-                title="Must contain at least 10 characters"
+                title={t("login.passwordHint")}
                 value={createAccForm.password}
                 onChange={(e) => setCreatAccForm({ ...createAccForm, password: e.target.value})}
                 required
             />
-            <button type="submit">Submit</button>
+            <button type="submit">{t("login.submit")}</button>
 
         </form>
 
         {/*login form */}
-        <h1 id="login-title">Login</h1>
+        <h1 id="login-title">{t("login.loginTitle")}</h1>
         <form onSubmit={onLoginSubmit}>
-          <label htmlFor="email">Email</label>
+          <label htmlFor="email">{t("login.email")}</label>
           <input
             id="login-email"
             name="email"
@@ -122,7 +123,7 @@ export default function Login() {
             required
           />
 
-          <label htmlFor="password">Password</label>
+          <label htmlFor="password">{t("login.password")}</label>
           <input
             id="login-password"
             name="password"
@@ -132,7 +133,7 @@ export default function Login() {
             required
           />
 
-          <button type="submit">Submit</button>
+          <button type="submit">{t("login.submit")}</button>
         </form>
       </main>
     );
