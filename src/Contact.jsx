@@ -1,5 +1,6 @@
 // src/Contact.jsx
 import { useMemo, useState, useEffect } from "react";
+import { useTranslation } from "react-i18next";
 
 const timeOptions = [
   "10:00 AM",
@@ -48,6 +49,7 @@ function getMonthMatrix(year, month) {
 }
 
 export default function Contact() {
+  const { i18n, t } = useTranslation();
   const today = new Date();
   const [form, setForm] = useState({
     name: "",
@@ -139,17 +141,17 @@ export default function Contact() {
         throw new Error(data.message || "Failed to submit");
       }
 
-      setStatus({ type: "ok", text: "Successfully sent." });
+      setStatus({ type: "ok", text: t("contact.success") });
       setPopup({
-        title: "Message sent",
-        detail: "Thanks for reaching out. We received your note and will follow up soon.",
+        title: t("contact.popupSentTitle"),
+        detail: t("contact.popupSentDetail"),
       });
 
       setForm({ name: "", email: "", phone_number: "", message: "" });
       setSelectedTime("");
       
     } catch (err) {
-      setStatus({ type: "error", text: "Failed to send message." });
+      setStatus({ type: "error", text: t("contact.error") });
       console.error(err);
     }
 
@@ -162,7 +164,7 @@ export default function Contact() {
     console.log("token", loginToken);
 
     if (!isLoggedIn) {
-      window.alert("You must be logged in to schedule a session.");
+      window.alert(t("contact.loginRequired"));
       //window.location.href = "/login"; 
       return;
     }
@@ -225,23 +227,20 @@ export default function Contact() {
 
   return (
     <main aria-labelledby="contact-title">
-      <h1 id="contact-title">Get In Touch</h1>
+      <h1 id="contact-title">{t("contact.title")}</h1>
 
       <section aria-label="Appointment Booking">
-        <h2>Book an Appointment</h2>
+        <h2>{t("contact.book")}</h2>
         <p>
-          Whether you're curious about a retreat, ritual, or immersion
-          experience, or just want to ask questions, I'd love to connect. Use
-          the form below or reach out via email or phone.
+          {t("contact.intro")}
         </p>
       </section>
-
       <section aria-label="Contact details">
-        <h2>Contact Details</h2>
-        <p>Email: rosa@reclaimingindigeneity.com</p>
-        <p>Phone: +1 (617) 488-9988</p>
+        <h2>{t("contact.details")}</h2>
+        <p>{t("contact.email")}: rosa@reclaimingindigeneity.com</p>
+        <p>{t("contact.phone")}: +1 (617) 488-9988</p>
         <p>
-          <em>Let's come home together.</em>
+          <em>{t("contact.tagline")}</em>
         </p>
       </section>
 
@@ -307,7 +306,7 @@ export default function Contact() {
         <div className="times">
           <div className="times-header">
             <div>{selectedLabel}</div>
-            <small>Choose a time</small>
+            <small>{t("contact.chooseTime")}</small>
           </div>
           <div className="times-grid">
             {timeOptions.map((time) => {
@@ -337,7 +336,7 @@ export default function Contact() {
                   aria-pressed={selectedTime === time}
                   disabled={isPastTime || isBooked}    // ⬅ disable past times today
                 >
-                  {time}{isBooked ? " (booked)" : ""}
+                  {time}{isBooked ? t("contact.bookedLabel") : ""}
                 </button>
               );
             })}
@@ -350,14 +349,14 @@ export default function Contact() {
         disabled={submitting || !selectedDate || !selectedTime}
         onClick={onSchedule}
       >
-        {submitting ? "Scheduling..." : "Schedule a Session"}
+        {submitting ? t("contact.scheduling") : t("contact.scheduleCta")}
       </button>
       <br></br>
 
       <section aria-label="Send a message">
-        <h2>Send a Message</h2>
+        <h2>{t("contact.msgHeading")}</h2>
         <form onSubmit={onSubmit}>
-          <label htmlFor="name">Name</label>
+          <label htmlFor="name">{t("contact.name")}</label>
           <input
             id="name"
             name="name"
@@ -367,7 +366,7 @@ export default function Contact() {
             required
           />
 
-          <label htmlFor="email">Email</label>
+          <label htmlFor="email">{t("contact.email")}</label>
           <input
             id="email"
             name="email"
@@ -377,7 +376,7 @@ export default function Contact() {
             required
           />
 
-          <label htmlFor="phone_number">Phone</label>
+          <label htmlFor="phone_number">{t("contact.phone")}</label>
           <input
             id="phone_number"
             name="phone_number"
@@ -386,7 +385,7 @@ export default function Contact() {
             onChange={(e) => setForm({ ...form, phone_number: e.target.value })}
           />
 
-          <label htmlFor="message">Message</label>
+          <label htmlFor="message">{t("contact.message")}</label>
           <textarea
             id="message"
             name="message"
@@ -397,7 +396,7 @@ export default function Contact() {
           />
 
           <button type="submit" disabled={submitting}>
-            {submitting ? "Sending..." : "Send"}
+            {submitting ? t("contact.sending") : t("contact.send")}
           </button>
 
           {status.text && (

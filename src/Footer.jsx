@@ -1,5 +1,6 @@
 import { useState } from "react";
 import logo from "./assets/casa-romero-logo.jpg";
+import { useTranslation } from "react-i18next";
 
 const weather_url =
   "https://api.open-meteo.com/v1/forecast?latitude=3.3761&longitude=-74.8015&hourly=temperature_2m&forecast_days=1&temperature_unit=fahrenheit";
@@ -22,6 +23,7 @@ const cur_temp_outer = await get_cur_temp();
 console.log(cur_temp_outer);
 
 export default function Footer() {
+  const { i18n, t } = useTranslation();
   const [cur_temp, setTemp] = useState("");
 
   if (cur_temp !== cur_temp_outer) {
@@ -31,11 +33,11 @@ export default function Footer() {
   return (
     <footer aria-label="Site footer">
       <div className="footer-brand">
-        <img className="footer-logo" src={logo} alt="Casa Romero logo" />
+        <img className="footer-logo" src={logo} alt={t("footer.logoAlt")} />
         <p>
           &copy; Reclaiming Indigeneity
-          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Current temperature
-          in Colombia: {cur_temp} &deg; F
+          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+          {t("footer.tempLabel")}
           &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
         </p>
         <a
@@ -45,7 +47,7 @@ export default function Footer() {
           className="link-button"
           aria-label="Subscribe to the Reclaiming Indigeneity Substack newsletter"
         >
-          Subscribe on Substack
+          {t("footer.subscribe")}
         </a>
       </div>
     </footer>

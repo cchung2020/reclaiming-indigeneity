@@ -1,6 +1,9 @@
 import { NavLink } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 
 export default function Header() {
+  const { i18n, t } = useTranslation();
+  
   return (
     <header>
       <nav aria-label="Main navigation">
@@ -10,7 +13,7 @@ export default function Header() {
             isActive ? "nav-link active" : "nav-link"
           }
         >
-          About
+          {t("nav.about")}
         </NavLink>
         <NavLink
           to="/spanish-immersion"
@@ -18,7 +21,7 @@ export default function Header() {
             isActive ? "nav-link active" : "nav-link"
           }
         >
-          Spanish Immersion
+          {t("nav.spanishImmersion")}
         </NavLink>
         <NavLink
           to="/solo-retreats"
@@ -26,7 +29,7 @@ export default function Header() {
             isActive ? "nav-link active" : "nav-link"
           }
         >
-          Solo Retreats
+          {t("nav.soloRetreats")}
         </NavLink>
         <NavLink
           to="/jewish-water-rituals"
@@ -34,7 +37,7 @@ export default function Header() {
             isActive ? "nav-link active" : "nav-link"
           }
         >
-          Jewish Water Rituals
+          {t("nav.jewishWaterRituals")}
         </NavLink>
         <NavLink
           to="/contact"
@@ -42,7 +45,7 @@ export default function Header() {
             isActive ? "nav-link active" : "nav-link"
           }
         >
-          Contact
+          {t("nav.contact")}
         </NavLink>
         <NavLink
           to="/login"
@@ -50,9 +53,14 @@ export default function Header() {
             isActive ? "nav-link active" : "nav-link"
           }
         >
-          Login/Logout
+          {t("nav.login")}
         </NavLink>
       </nav>
+      <div className="lang-switch">
+        <button onClick={() => i18n.changeLanguage("en")}>EN</button>
+        <button onClick={() => i18n.changeLanguage("es")}>ES</button>
+        <button onClick={() => i18n.changeLanguage("he")}>HE</button>
+      </div>
     </header>
   );
 }
