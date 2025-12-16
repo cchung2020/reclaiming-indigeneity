@@ -1,12 +1,16 @@
 import retreatsHero from "./assets/retreats-hero-sunset.jpg";
 import retreatsAmenities from "./assets/retreats-amenities-creek3.jpg";
 import retreatsRhythm from "./assets/retreats-rhythm-flower.jpg";
+import { useTranslation } from "react-i18next";
 
 export default function SoloRetreats() {
+  const { i18n, t } = useTranslation();
+  const amenities = t("retreats.amenitiesList", { returnObjects: true });
+
   return (
     <main aria-labelledby="retreats-title">
       <h1 className="page-title" id="retreats-title">
-        Solo Retreats — Time for Stillness and Reconnection
+        {t("retreats.title")}
       </h1>
 
       <section className="hero">
@@ -18,13 +22,9 @@ export default function SoloRetreats() {
 
       <div className="flow">
         <section className="block text">
-          <h2>Amenities & Setting</h2>
+          <h2>{t("retreats.amenitiesHeading")}</h2>
           <ul>
-            <li>Private cabin, casita, or yurt with mountain or garden view</li>
-            <li>Outdoor spaces for meditation, writing, and art</li>
-            <li>Shared kitchen and library with books on ecology and ritual</li>
-            <li>River trail access for bathing and reflection</li>
-            <li>Optional herbal steam or sweat-lodge experience</li>
+            {amenities.map((item) => <li key={item}>{item}</li>)}
           </ul>
         </section>
 
@@ -43,20 +43,16 @@ export default function SoloRetreats() {
         </figure>
 
         <section className="block text">
-          <h2>Daily Rhythm</h2>
+          <h2>{t("retreats.dailyHeading")}</h2>
           <p>
-            Days unfold without clocks or noise. Mornings often begin with tea
-            at sunrise, followed by writing, prayer, or walking meditation.
-            Afternoons invite rest, journaling, or exploring the forest paths.
-            Evenings bring simple shared meals or quiet stargazing over the
-            valley.
+            {t("retreats.dailyBody")}
           </p>
         </section>
 
         <section className="block text">
-          <h2>Reserve Your Retreat</h2>
+          <h2>{t("retreats.bookHeading")}</h2>
           <div id="booking-widget-retreats"></div>
-          <p>Retreats may be scheduled for a few days or several weeks.</p>
+          <p>{t("retreats.bookBody")}</p>
         </section>
       </div>
     </main>

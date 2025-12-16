@@ -46,5 +46,49 @@
   "login.passwordHint": "Debe tener al menos 10 caracteres",
   "login.submit": "Enviar",
   "login.createFailed": "La creación de la cuenta falló",
-  "login.loginFailed": "Usuario o contraseña incorrectos, inténtalo de nuevo"
+  "login.loginFailed": "Usuario o contraseña incorrectos, inténtalo de nuevo",
+
+  "water.title": "Rituales de Agua Judíos - Regresar al flujo de la creación",
+  "water.aboutHeading": "Sobre la práctica",
+  "water.aboutBody": "Los Rituales de Agua Judíos en Casa Romero invitan a entrar al elemento sagrado del agua como maestra viva. Arraigados en la tradición antigua del mikve y renovados con conciencia ecológica contemporánea, se realizan al aire libre en el río y manantiales. Cada inmersión se guía por intención, preparación y plegaria: un proceso encarnado de soltar y regresar.",
+  "water.riverHeading": "El río como maestro",
+  "water.riverBody": "Las aguas que alimentan Casa Romero provienen de manantiales de montaña llamados quebradas—corrientes que han sostenido vida humana y más-que-humana por milenios. Las inmersiones aquí no son simbólicas; son actos ecológicos de reciprocidad. Cada participante es invitado a escuchar el ritmo del río, ofrecer gratitud y no dejar rastro más allá de la plegaria y el aliento.",
+  "water.decolonizingHeading": "Descolonizando el mikve",
+  "water.decolonizingBody": "Nuestro enfoque reconecta la inmersión con la tierra que la sostiene. En muchas comunidades, el ritual se separó del territorio y se encerró en piscinas de azulejos. Aquí, los arroyos de Boyacá son la vasija—reclamando la inmersión como diálogo con la creación.",
+  "water.expectHeading": "Qué esperar",
+  "water.expectBody": "Se comienza con reflexión e intención guiada. Puede incluir canto, plegaria hablada o silencio según la necesidad. Las inmersiones son inclusivas de género y de cuerpos, basadas en consentimiento, seguridad y cuidado.",
+  "water.bookHeading": "Agenda un ritual de agua",
+  "water.bookBody": "Se pueden programar inmersiones individuales o grupales durante todo el año, según el clima. Se adaptan a transiciones de vida, sanación o renovación espiritual.",
+
+  "retreats.title": "Retiros en solitario - Tiempo para quietud y reconexión",
+  "retreats.amenitiesHeading": "Comodidades y entorno",
+  "retreats.amenitiesList": [
+    "Cabaña, casita o yurta privada con vista a montaña o jardín",
+    "Espacios al aire libre para meditación, escritura y arte",
+    "Cocina compartida y biblioteca con libros de ecología y ritual",
+    "Acceso al sendero del río para baño y reflexión",
+    "Opción de vapor de hierbas o temazcal"
+  ],
+  "retreats.dailyHeading": "Ritmo diario",
+  "retreats.dailyBody": "Los días transcurren sin relojes ni ruido. Las mañanas empiezan con té al amanecer y pueden seguir con escritura, oración o caminata meditativa. Las tardes invitan al descanso o explorar los senderos del bosque. Las noches traen comidas sencillas compartidas o contemplación de las estrellas.",
+  "retreats.bookHeading": "Reserva tu retiro",
+  "retreats.bookBody": "Los retiros pueden programarse por unos días o varias semanas.",
+
+  "immersion.title": "Inmersión en español - Aprender a través de la tierra y la comunidad",
+  "immersion.focusHeading": "Enfoque del programa",
+  "immersion.focusBody": "La inmersión es para todos los niveles. Integra conversación, arte, canto y vocabulario ecológico para pensar en español a través de la experiencia vivida. Las mañanas pueden incluir estudio guiado; las tardes práctica con la comunidad en huertas o cocina. La meta es la fluidez en la relación, no la perfección gramatical.",
+  "immersion.includedHeading": "Qué incluye",
+  "immersion.includedList": [
+    "Sesiones diarias con docentes nativos",
+    "Comidas de la huerta a la mesa y práctica de cocina compartida",
+    "Talleres de arte y movimiento para aprendizaje experiencial",
+    "Círculos de conversación comunitaria y excursiones",
+    "Alojamiento sencillo y acceso a los senderos"
+  ],
+  "immersion.overviewHeading": "Visión general",
+  "immersion.overviewBody": "Nuestra inmersión no es un aula. Es un modo encarnado y relacional que sucede en la vida diaria en la tierra: cocinar, cultivar, contar historias y reír. Se practica el idioma del cuidado cotidiano: cómo pedir lo que la tierra necesita, cómo contar historias al fuego, cómo escuchar al viento.",
+  "immersion.stayHeading": "Estadía y vida comunitaria",
+  "immersion.stayBody": "Las habitaciones son rústicas y cómodas, construidas con materiales locales. El Wi‑Fi es limitado para fomentar la presencia. Las comidas son familiares, con productos locales y preparación tradicional.",
+  "immersion.bookHeading": "Reserva tu inmersión",
+  "immersion.bookBody": "Sesiones disponibles todo el año con duraciones flexibles."
 }

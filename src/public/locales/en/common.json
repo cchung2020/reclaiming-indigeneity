@@ -46,6 +46,49 @@
   "login.passwordHint": "Must contain at least 10 characters",
   "login.submit": "Submit",
   "login.createFailed": "Account creation failed",
-  "login.loginFailed": "Incorrect username or password, please try again"
+  "login.loginFailed": "Incorrect username or password, please try again",
 
+  "water.title": "Jewish Water Rituals - Returning to the Flow of Creation",
+  "water.aboutHeading": "About the Practice",
+  "water.aboutBody": "The Jewish Water Rituals at Casa Romero invite participants to enter the sacred element of water as a living teacher. Rooted in the ancient tradition of mikvah and renewed through contemporary ecological awareness, these ceremonies are held outdoors at the river and natural springs on our property. Each immersion is guided by intention, preparation, and prayer—an embodied process of release and return.",
+  "water.riverHeading": "The River as Teacher",
+  "water.riverBody": "The waters that feed Casa Romero come from mountain springs known locally as quebradas—streams that have sustained human and more-than-human life for millennia. Immersions here are not symbolic; they are ecological acts of reciprocity. Each participant is invited to listen to the river’s rhythms, to offer gratitude, and to leave no trace beyond prayer and breath.",
+  "water.decolonizingHeading": "Decolonizing the Mikvah",
+  "water.decolonizingBody": "Our approach reconnects the practice of immersion to the earth that sustains it. In many communities, water ritual has been separated from the land, confined to tiled pools and private walls. Here, the mountain streams of Boyacá become the vessel—reclaiming immersion as a dialogue with creation.",
+  "water.expectHeading": "What to Expect",
+  "water.expectBody": "Participants begin with quiet reflection and intention-setting guided by a facilitator. The ritual may include song, spoken prayer, or silence depending on the needs of each person. Immersions are gender-inclusive and body-positive, grounded in consent, safety, and care.",
+  "water.bookHeading": "Book a Water Ritual",
+  "water.bookBody": "Individual and small-group immersions can be arranged year-round, weather permitting. Ceremonies are tailored for life transitions, healing journeys, or moments of spiritual renewal.",
+
+  "retreats.title": "Solo Retreats - Time for Stillness and Reconnection",
+  "retreats.amenitiesHeading": "Amenities & Setting",
+  "retreats.amenitiesList": [
+    "Private cabin, casita, or yurt with mountain or garden view",
+    "Outdoor spaces for meditation, writing, and art",
+    "Shared kitchen and library with books on ecology and ritual",
+    "River trail access for bathing and reflection",
+    "Optional herbal steam or sweat-lodge experience"
+  ],
+  "retreats.dailyHeading": "Daily Rhythm",
+  "retreats.dailyBody": "Days unfold without clocks or noise. Mornings often begin with tea at sunrise, followed by writing, prayer, or walking meditation. Afternoons invite rest, journaling, or exploring the forest paths. Evenings bring simple shared meals or quiet stargazing over the valley.",
+  "retreats.bookHeading": "Reserve Your Retreat",
+  "retreats.bookBody": "Retreats may be scheduled for a few days or several weeks.",
+
+  "immersion.title": "Spanish Immersion - Learn Through Land and Community",
+  "immersion.focusHeading": "Program Focus",
+  "immersion.focusBody": "The immersion is designed for all levels. Instruction integrates conversation, art, song, and ecological vocabulary so students learn to think in Spanish as they move through lived experience. Mornings may include guided study; afternoons are spent practicing with community members in the gardens or kitchen. The goal is fluency of relationship, not perfection of grammar.",
+  "immersion.includedHeading": "What's Included",
+  "immersion.includedList": [
+    "Daily language sessions with native teachers",
+    "Farm-to-table meals and shared cooking practice",
+    "Art and movement workshops for experiential learning",
+    "Community conversation circles and field excursions",
+    "Simple lodging and access to the surrounding trails"
+  ],
+  "immersion.overviewHeading": "Overview",
+  "immersion.overviewBody": "Our Spanish Immersion program is not a classroom. It is an embodied, relational way of learning that happens through everyday life on the land: cooking, gardening, storytelling, and shared laughter. Participants practice the language of daily care—how to ask for what the soil needs, how to tell stories around the fire, how to listen to the wind.",
+  "immersion.stayHeading": "Stay & Community Life",
+  "immersion.stayBody": "Guests stay in rustic, comfortable rooms built with local materials. Wi-Fi is limited by design to encourage presence and slow living. Meals are shared family-style, emphasizing local produce and traditional preparation methods.",
+  "immersion.bookHeading": "Book Your Immersion",
+  "immersion.bookBody": "Sessions are available year-round with flexible durations."
 }

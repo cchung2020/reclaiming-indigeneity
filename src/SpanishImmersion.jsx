@@ -1,12 +1,16 @@
 import immersionHero from "./assets/immersion-hero-berries.jpg";
 import immersionFocus from "./assets/immersion-focus-creek2.jpg";
 import immersionIncluded from "./assets/immersion-included-cows.jpg";
+import { useTranslation } from "react-i18next";
 
 export default function SpanishImmersion() {
+  const { i18n, t } = useTranslation();
+  const immersionList = t("immersion.includedList", { returnObjects: true });
+
   return (
     <main aria-labelledby="immersion-title">
       <h1 className="page-title" id="immersion-title">
-        Spanish Immersion — Learn Through Land and Community
+        {t("immersion.title")}
       </h1>
 
       <section className="hero">
@@ -18,14 +22,9 @@ export default function SpanishImmersion() {
 
       <div className="flow">
         <section className="block text">
-          <h2>Program Focus</h2>
+          <h2>{t("immersion.focusHeading")}</h2>
           <p>
-            The immersion is designed for all levels. Instruction integrates
-            conversation, art, song, and ecological vocabulary so students learn
-            to think in Spanish as they move through lived experience. Mornings
-            may include guided study; afternoons are spent practicing with
-            community members in the gardens or kitchen. The goal is fluency of
-            relationship, not perfection of grammar.
+            {t("immersion.focusBody")}
           </p>
         </section>
 
@@ -44,42 +43,30 @@ export default function SpanishImmersion() {
         </figure>
 
         <section className="block text">
-          <h2>What’s Included</h2>
+          <h2>{t("immersion.includedHeading")}</h2>
           <ul>
-            <li>Daily language sessions with native teachers</li>
-            <li>Farm-to-table meals and shared cooking practice</li>
-            <li>Art and movement workshops for experiential learning</li>
-            <li>Community conversation circles and field excursions</li>
-            <li>Simple lodging and access to the surrounding trails</li>
+            {immersionList.map((item) => <li key={item}>{item}</li>)}
           </ul>
         </section>
 
         <section className="block text">
-          <h2>Overview</h2>
+          <h2>{t("immersion.overviewHeading")}</h2>
           <p>
-            Our Spanish Immersion program is not a classroom. It is an embodied,
-            relational way of learning that happens through everyday life on the
-            land: cooking, gardening, storytelling, and shared laughter.
-            Participants practice the language of daily care—how to ask for what
-            the soil needs, how to tell stories around the fire, how to listen
-            to the wind.
+            {t("immersion.overviewBody")}
           </p>
         </section>
 
         <section className="block text">
-          <h2>Stay & Community Life</h2>
+          <h2>{t("immersion.stayHeading")}</h2>
           <p>
-            Guests stay in rustic, comfortable rooms built with local materials.
-            Wi-Fi is limited by design to encourage presence and slow living.
-            Meals are shared family-style, emphasizing local produce and
-            traditional preparation methods.
+            {t("immersion.stayBody")}
           </p>
         </section>
 
         <section className="block text">
-          <h2>Book Your Immersion</h2>
+          <h2>{t("immersion.bookHeading")}</h2>
           <div id="booking-widget-immersion"></div>
-          <p>Sessions are available year-round with flexible durations.</p>
+          <p>{t("immersion.bookBody")}</p>
         </section>
       </div>
     </main>
