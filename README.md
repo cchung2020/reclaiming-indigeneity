@@ -4,7 +4,7 @@ This project is a proposed redesign of https://reclaimingindigeneity.com/, desig
 
 # Setup Instructions
 
-Download the packages with `npm install`. Run the project with `npm run dev`.
+Download the packages with `npm install`. Run the project with `vercel dev`, or `npm run dev` for a local instance.
 
 # Wiggle Room Requirements
 
