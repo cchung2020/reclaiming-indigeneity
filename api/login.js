@@ -1,6 +1,7 @@
 import { MongoClient, ServerApiVersion } from "mongodb";
 import { compareSync } from "bcryptjs";
-
+import pkg from "jwt-simple"
+const { encode } = pkg;
 
 let client;
 let clientPromise;
@@ -13,6 +14,7 @@ if (!global._mongoClientPromise) {
 }
 clientPromise = global._mongoClientPromise;
 
+const secret = process.env.SECRET;
 
 export default async function handler(req, res) {
   if (req.method !== "POST") {
@@ -23,6 +25,9 @@ export default async function handler(req, res) {
   try {
     const { email, password } =
       typeof req.body === "string" ? JSON.parse(req.body || "{}") : req.body;
+
+    const token = encode(email, secret);
+    console.log('JWT generated:', token)
 
     const mongo_client = await clientPromise;
     const db = mongo_client.db("ReclaimingIndigeneity");
@@ -38,7 +43,7 @@ export default async function handler(req, res) {
     }
 
     if (matches) {
-      res.status(200).json({ ok: true })
+      res.status(200).json({ ok: true, token: token })
     } else {
       console.log("saying bad username or password")
       res.status(401).json( {error: "bad username or password"} );

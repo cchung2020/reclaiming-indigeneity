@@ -11,11 +11,11 @@ export default function Login() {
     password: "",
   })
 
-  const initialy_logged_in = localStorage.getItem("logged_in") !== null;
+  const initialy_logged_in = localStorage.getItem("login_token") !== null;
   const [logged_in, setLoggedIn] = useState(initialy_logged_in);
 
   function logOut() {
-    localStorage.removeItem("logged_in");
+    localStorage.removeItem("login_token");
     setLoggedIn(false);
     console.log("logged in?", logged_in);
   }
@@ -30,12 +30,13 @@ export default function Login() {
     });
 
     const data = await creation_res.json();
+    const token = data.token;
     console.log(data);
 
     if (creation_res.ok) {
         setCreatAccForm({email: "", password: ""})
         setLoggedIn(true);
-        localStorage.setItem("logged_in", "yes")
+        localStorage.setItem("login_token", token);
     } else {
         window.alert("account creation failed")
     }
@@ -52,6 +53,7 @@ export default function Login() {
     });
 
     const data = await login_res.json();
+    const token = data.token;
 
     console.log("login res: ", login_res);
     console.log("data", data);
@@ -59,7 +61,7 @@ export default function Login() {
 
     if (login_res.ok) {
       setLoggedIn(true);
-      localStorage.setItem("logged_in", "yes");
+      localStorage.setItem("login_token", token);
     } else {
         window.alert("Incorrect username or password, please try again")
     }
