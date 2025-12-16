@@ -208,9 +208,9 @@ export default function Contact() {
 
       setPopup({
         title: "Session scheduled",
-        detail: `${selectedLabel} at ${selectedTime}. We'll confirm details soon.`,
+        detail: t("contact.popupBookedDetail"),
       });
-      setStatus({ type: "ok", text: "Session scheduled." });
+      setStatus({ type: "ok", text: t("contact.popupBookedTitle") });
       setBookedTimes((prev) => {
         const next = new Set(prev);
         next.add(selectedTime);
@@ -219,7 +219,7 @@ export default function Contact() {
     } catch (err) {
       console.error(err);
       setStatus({ type: "error", text: "Failed to schedule session." });
-      window.alert("Scheduling failed. Please try again.");
+      window.alert(t("contact.scheduleFailed"));
     } finally {
       setSubmitting(false);
     }
