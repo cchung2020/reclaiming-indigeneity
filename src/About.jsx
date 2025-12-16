@@ -2,121 +2,98 @@ import { Link } from "react-router-dom";
 import aboutHero from "./assets/about-hero-valley.jpg";
 import aboutPurpose from "./assets/about-purpose-hillside.jpg";
 import aboutWhere from "./assets/about-where-creek.jpg";
+import { useTranslation } from "react-i18next";
 
 export default function About() {
+  const { i18n, t } = useTranslation();
+
   return (
     <main aria-labelledby="about-title">
       <h1 className="page-title" id="about-title">
-        Casa Romero — A Decolonization Retreat Center in Boyacá, Colombia
+        {t("about.title")}
       </h1>
 
       <section className="hero">
         <img
           src={aboutHero}
-          alt="Mountain valley landscape near Boyacá, Colombia"
+          alt={t("about.heroAlt")}
         />
       </section>
 
       <div className="flow">
         <section className="block text">
-          <h2>Our Purpose</h2>
+          <h2>{t("about.purposeHeading")}</h2>
           <p>
-            Casa Romero is a living experiment in remembering how to live well
-            with the land. Rooted in Indigenous and Jewish ecological wisdom, it
-            offers a space to unlearn the patterns of colonization through
-            language, ritual, and relationship. The retreat center welcomes all
-            who wish to reconnect with the earth and participate in healing the
-            stories that separate people from place.
+            {t("about.purposeBody")}
           </p>
         </section>
 
         <figure className="block media">
           <img
             src={aboutPurpose}
-            alt="Hillside with trees around Casa Romero"
+            alt={t("about.purposeImgALt")}
           />
         </figure>
 
         <figure className="block media">
           <img
             src={aboutWhere}
-            alt="Forest creek and rocks near the retreat grounds"
+            alt={t("about.whereImgAlt")}
           />
         </figure>
 
         <section className="block text">
-          <h2>Where We Are</h2>
+          <h2>{t("about.whereHeading")}</h2>
           <p>
-            Nestled in the highlands of Boyacá, Colombia, Casa Romero sits on
-            sacred Muisca territory surrounded by mountains, waterfalls, and
-            rich soils. The property includes gardens, forested hillsides, and a
-            freshwater spring, offering visitors a direct encounter with the
-            vitality of the land. Our architecture blends traditional clay and
-            bamboo with modern sustainability practices, keeping the footprint
-            light and the air clean.
+            {t("about.whereBody")}
           </p>
         </section>
 
         <section className="block text">
-          <h2>Mission & Vision</h2>
+          <h2>{t("about.missionHeading")}</h2>
           <p>
-            Our mission is to support personal and collective decolonization
-            through immersive, land-based experiences that weave together
-            cultural memory, traditional medicine, and spiritual practice.
+            {t("about.missionBody1")}
           </p>
           <p>
-            We envision a world in which every person remembers their belonging
-            to the earth, speaks from ancestral integrity, and contributes to a
-            network of communities grounded in reciprocity and care.
+            {t("about.missionBody2")}
           </p>
         </section>
 
         <section className="block text">
-          <h2>Our Approach</h2>
+          <h2>{t("about.approachHeading")}</h2>
           <p>
-            Everything that happens here—language immersion, ritual practice,
-            herbal study, or solitude—is guided by the rhythm of the land. Days
-            begin with quiet time for prayer or reflection, followed by work in
-            the gardens, river walks, or study under the trees. Guests
-            participate not as tourists but as temporary community members
-            contributing to an ecosystem of learning.
+            {t("about.approachBody")}
           </p>
         </section>
 
         <section className="block text">
-          <h2>Offerings</h2>
+          <h2>{t("about.offeringsHeading")}</h2>
           <ul>
             <li>
               <Link to="/spanish-immersion" className="link-button inline">
-                Spanish Immersion
+                {t("about.offeringsSpanish")}
               </Link>{" "}
-              — learn language through relationship, art, and ecology.
+              {t("about.offeringsSpanishDesc")}
             </li>
             <li>
               <Link to="/solo-retreats" className="link-button inline">
-                Solo Retreats
+                {t("about.offeringsSolo")}
               </Link>{" "}
-              — restorative time for quiet, reflection, and reconnection with
-              nature.
+              {t("about.offeringsSoloDesc")}
             </li>
             <li>
               <Link to="/jewish-water-rituals" className="link-button inline">
-                Jewish Water Rituals
+                {t("about.offeringsWater")}
               </Link>{" "}
-              — ritual practice at the confluence of tradition and landscape.
+              {t("about.offeringsWaterDesc")}
             </li>
           </ul>
         </section>
 
         <section className="block text">
-          <h2>Why Colombia?</h2>
+          <h2>{t("about.whyHeading")}</h2>
           <p>
-            Colombia is a place of extraordinary biodiversity and cultural
-            renewal. For generations, the region’s Indigenous and Afro-Colombian
-            communities have preserved knowledge about balance and regeneration.
-            By situating Casa Romero here, we honor those lineages and invite
-            international visitors to engage with the heart of decolonization
-            work in a living landscape of resistance and rebirth.
+            {t("about.whyBody")}
           </p>
         </section>
       </div>
