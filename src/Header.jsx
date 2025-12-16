@@ -4,6 +4,10 @@ import { useTranslation } from "react-i18next";
 export default function Header() {
   const { i18n, t } = useTranslation();
   
+  const handleLanguageChange = (e) => {
+    i18n.changeLanguage(e.target.value);
+  };
+
   return (
     <header>
       <nav aria-label="Main navigation">
@@ -56,11 +60,18 @@ export default function Header() {
           {t("nav.login")}
         </NavLink>
       </nav>
-      <div className="lang-switch">
-        <button onClick={() => i18n.changeLanguage("en")}>EN</button>
-        <button onClick={() => i18n.changeLanguage("es")}>ES</button>
-        <button onClick={() => i18n.changeLanguage("he")}>HE</button>
-      </div>
+          <div className="lang-dropdown">
+            <span className="lang-label">Language</span>
+            <select
+              id="language-select"
+              value={i18n.language}
+              onChange={handleLanguageChange}
+            >
+              <option value="en">EN</option>
+              <option value="es">ES</option>
+              <option value="he">HE</option>
+            </select>
+          </div>
     </header>
   );
 }

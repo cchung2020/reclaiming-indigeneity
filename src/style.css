@@ -464,3 +464,21 @@ button.ghost {
   background-color: rgb(31, 27, 27);
   cursor: not-allowed;
 }
+
+.lang-dropdown {
+  position: absolute;
+  top: 1rem;
+  right: var(--pad);
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+  align-items: flex-end;
+}
+
+.lang-label {
+  font-size: 0.75rem;
+  letter-spacing: 0.08em;
+  color: var(--muted);
+  text-transform: uppercase;
+}
+
